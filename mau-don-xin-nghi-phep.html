@@ -2,10 +2,125 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Mẫu Đơn Xin Nghỉ Phép</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đơn Xin Nghỉ Phép</title>
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 595px; /* Chiều rộng tối đa cho A5 nằm ngang: 595px */
+            height: 420px; /* Chiều cao cho A5 nằm ngang: 420px */
+            margin: 0 auto;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #000;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .header-left,
+        .header-right {
+            width: 45%;
+        }
+        .header-center {
+            width: 10%;
+        }
+        .header-left p,
+        .header-right p {
+            margin: 0;
+        }
+        h2 {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .info, .content {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .info label {
+            font-weight: bold;
+        }
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .signatures div {
+            text-align: center;
+            width: 30%;
+        }
+        .date {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Mẫu Đơn Xin Nghỉ Phép</h1>
-    <!-- Nội dung đơn xin nghỉ phép -->
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <p><strong>CÔNG TY CỔ PHẦN BMFOOD</strong></p>
+                <p>Số........../2024/DX-NP</p>
+            </div>
+            <div class="header-center">
+            </div>
+            <div class="header-right">
+                <p><strong>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong></p>
+                <p><em>Độc lập – Tự do – Hạnh phúc</em></p>
+            </div>
+        </div>
+
+        <h2>ĐƠN XIN NGHỈ PHÉP</h2>
+
+        <div class="info">
+            <p><label>Kính gửi:</label> 
+            <ul>
+                <li>Ban giám đốc Công ty Cổ Phần BMFOOD</li>
+                <li>Trưởng phòng Hành chính - Nhân sự</li>
+                <li>Trưởng Bộ phận Xưởng Sản Xuất</li>
+            </ul>
+            </p>
+            <p><label>Tôi tên:</label> .................................................. <label>Chức vụ:</label> ..................................................</p>
+            <p><label>Bộ phận làm việc:</label> ..............................................................................................................</p>
+            <p>Nay tôi làm đơn này kính xin Ban lãnh đạo Công ty cho phép tôi được nghỉ ............ ngày (ngày .........../............/2024 đến ngày .........../............/2024).</p>
+            <p><label>Lý do nghỉ:</label> ............................................................................................................................................</p>
+            <p><label>Nghỉ theo diện:</label> 
+                <input type="checkbox"> Việc Riêng 
+                <input type="checkbox"> Phép Năm 
+                <input type="checkbox"> Nghỉ Chế Độ 
+            </p>
+            <p>Tôi đã bàn giao công việc cho: ..............................................................................................................</p>
+            <p>Tôi cam đoan đã bàn giao công việc lại cho bộ phận có liên quan trước khi nghỉ việc.</p>
+            <p>Rất mong Ban giám đốc xem xét và chấp thuận.</p>
+        </div>
+
+        <p class="date">
+            Bình Minh, Ngày ......... Tháng ........... Năm 2024.
+        </p>
+
+        <div class="signatures">
+            <div>
+                <p>Trưởng phòng HCNS</p>
+                <p>(Ký, ghi rõ họ tên)</p>
+            </div>
+            <div>
+                <p>Trưởng bộ phận</p>
+                <p>(Ký, ghi rõ họ tên)</p>
+            </div>
+            <div>
+                <p>Người làm đơn</p>
+                <p>(Ký, ghi rõ họ tên)</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
