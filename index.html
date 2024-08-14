@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý giấy tờ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+        }
+        .document-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .document-item {
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .document-item:hover {
+            background-color: #f0f0f0;
+        }
+        .document-viewer {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            display: none;
+        }
+        .print-btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quản lý giấy tờ</h1>
+    <input type="text" id="searchInput" class="search-bar" placeholder="Tìm kiếm giấy tờ...">
+
+    <ul id="documentList" class="document-list">
+        <li class="document-item" data-document="mau-giay-xuat-kho.html">Mẫu Giấy Xuất Kho</li>
+        <li class="document-item" data-document="mau-don-xin-nghi-phep.html">Mẫu Đơn Xin Nghỉ Phép</li>
+        <!-- Thêm các mục giấy tờ khác ở đây -->
+    </ul>
+
+    <div id="documentViewer" class="document-viewer">
+        <iframe id="documentFrame" src="" width="100%" height="500px"></iframe>
+        <button class="print-btn" onclick="printDocument()">In tài liệu</button>
+    </div>
+
+    <script>
+        const documentList = document.getElementById('documentList');
+        const documentViewer = document.getElementById('documentViewer');
+        const documentFrame = document.getElementById('documentFrame');
+        const searchInput = document.getElementById('searchInput');
+
+        documentList.addEventListener('click', function(e) {
+            if (e.target && e.target.nodeName === "LI") {
+                const documentSrc = e.target.getAttribute('data-document');
+                documentFrame.src = documentSrc;
+                documentViewer.style.display = 'block';
+            }
+        });
+
+        searchInput.addEventListener('keyup', function() {
+            const filter = searchInput.value.toLowerCase();
+            const items = documentList.getElementsByTagName('li');
+
+            for (let i = 0; i < items.length; i++) {
+                const txtValue = items[i].textContent || items[i].innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        });
+
+        function printDocument() {
+            documentFrame.contentWindow.print();
+        }
+    </script>
+</body>
+</html>
