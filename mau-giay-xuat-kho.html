@@ -6,15 +6,20 @@
     <title>Phiếu Đề Nghị Xuất Kho</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
         }
         .container {
-            max-width: 800px;
+            width: 100%;
+            max-width: 794px; /* Chiều rộng tối đa cho A4: 794px */
             margin: 0 auto;
             border: 1px solid #000;
             padding: 20px;
+            box-sizing: border-box;
+            height: 1123px; /* Chiều cao của A4: 1123px */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         h1 {
             text-align: center;
@@ -41,9 +46,10 @@
             padding: 5px;
         }
         .signatures {
-            margin-top: 40px;
+            font-weight: bold;
+            margin-top: -31px;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
         }
         .signatures div {
             text-align: center;
@@ -52,6 +58,11 @@
 </head>
 <body>
     <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <p><strong>CÔNG TY CỔ PHẦN BMFOOD</strong></p>
+                <p>Mã số thuế: 123456789</p>
+            </div>
         <h1>PHIẾU ĐỀ NGHỊ XUẤT KHO</h1>
         <div class="info">
             <p><label>Người đề nghị:</label> .................................................. <label>Bộ Phận:</label> ..................................................</p>
