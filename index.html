@@ -58,7 +58,7 @@
         <button class="print-btn" onclick="printDocument()">In tài liệu</button>
     </div>
 
-    <script>
+<!--     <script>
         const documentList = document.getElementById('documentList');
         const documentViewer = document.getElementById('documentViewer');
         const documentFrame = document.getElementById('documentFrame');
@@ -89,6 +89,55 @@
         function printDocument() {
             documentFrame.contentWindow.print();
         }
-    </script>
+    </script> -->
+    <script>
+    const documentList = document.getElementById('documentList');
+    const documentViewer = document.getElementById('documentViewer');
+    const documentFrame = document.getElementById('documentFrame');
+    const searchInput = document.getElementById('searchInput');
+
+    documentList.addEventListener('click', function(e) {
+        if (e.target && e.target.nodeName === "LI") {
+            const documentSrc = e.target.getAttribute('data-document');
+
+            // Kiểm tra xem file có tồn tại hay không
+            fetch(documentSrc, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        documentFrame.src = documentSrc;
+                        documentViewer.style.display = 'block';
+                    } else {
+                        // Nếu file không tồn tại, chuyển hướng tới trang lỗi
+                        documentFrame.src = 'error.html';
+                        documentViewer.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    // Nếu có lỗi, cũng chuyển hướng tới trang lỗi
+                    documentFrame.src = 'error.html';
+                    documentViewer.style.display = 'block';
+                });
+        }
+    });
+
+    searchInput.addEventListener('keyup', function() {
+        const filter = searchInput.value.toLowerCase();
+        const items = documentList.getElementsByTagName('li');
+
+        for (let i = 0; i < items.length; i++) {
+            const txtValue = items[i].textContent || items[i].innerText;
+            if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                items[i].style.display = "";
+            } else {
+                items[i].style.display = "none";
+            }
+        }
+    });
+
+    function printDocument() {
+        documentFrame.contentWindow.print();
+    }
+</script>
+
 </body>
 </html>
