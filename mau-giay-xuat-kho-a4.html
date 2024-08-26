@@ -6,57 +6,82 @@
     <title>Phiếu Đề Nghị Xuất Kho</title>
     <style>
         body {
+            font-family: "Times New Roman", serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
         }
         .container {
             width: 100%;
-            max-width: 794px; /* Chiều rộng tối đa cho A4: 794px */
             margin: 0 auto;
-/*             border: 1px solid #000; */
-/*             padding: 20px; */
+            padding: 20px;
             box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            /* Kích thước A5 nằm ngang */
+            max-width: 210mm;
+            max-height: 148mm;
         }
         .header {
-            margin-top: -30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+/*             margin-bottom: 20px; */
+        }
+        .header-left, .header-right {
+            width: 45%;
+        }
+        .header-center {
+            width: 10%;
+        }
+        .header-left p, .header-right p {
+            margin: 0;
         }
         .header-left {
-/*             margin-top: -10px; */
+            text-align: left;
         }
-        h1 {
+        .header-right {
+            text-align: right;
+        }
+        h2 {
+            font-size: 18px;
             text-align: center;
-            font-size: 24px;
-            margin-bottom: -10px;
+            margin: 0;
         }
         .info {
-            margin-bottom: 10px;
             line-height: 1.5;
+            font-size: 16px;
         }
-
-        .table-container {
+        .info p {
+            margin: 5px 0;
+        }
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+/*             margin-top: 30px; */
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .signatures div {
+            text-align: center;
+            width: 30%;
+        }
+        .date {
+            text-align: right;
+            margin: 0;
+            font-style: italic;
+        }
+        .signatures-note {
             margin-top: -10px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
+/*             margin-top: 20px; */
+            font-size: 16px;
         }
         table, th, td {
-            border: 1px solid #000;
+            border: 1px solid black;
         }
         th, td {
-            text-align: center;
-            padding: 10px;
-        }
-        .signatures {
-            font-weight: bold;
-            margin-top: -19px;
-            display: flex;
-            justify-content: space-around;
-        }
-        .signatures div {
+            padding: 8px;
             text-align: center;
         }
     </style>
@@ -66,64 +91,66 @@
         <div class="header">
             <div class="header-left">
                 <p><strong>CÔNG TY CỔ PHẦN BMFOOD</strong></p>
-                <p style="margin-top: -10px";>MST: 3603823168</p>
             </div>
-        <h1>PHIẾU ĐỀ NGHỊ XUẤT KHO</h1>
-        <div class="info">
-            <p style="margin-bottom: -15px";><label>Người đề nghị:</label> .................................................. <label>Bộ Phận:</label> ..................................................</p>
-            <p><label>Mục đích sử dụng:</label> ..............................................................................................................</p>
+            <div class="header-right">
+            </div>
         </div>
 
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>TÊN VẬT TƯ</th>
-                        <th>ĐVT</th>
-                        <th>SỐ LƯỢNG</th>
-                        <th>GHI CHÚ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dòng trống để người dùng điền -->
-                    <tr><td>1</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>2</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>3</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>4</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>5</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>6</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>7</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>8</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>9</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>10</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>11</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>12</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>13</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>14</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>15</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>16</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>17</td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td>18</td><td></td><td></td><td></td><td></td></tr>
-                </tbody>
-            </table>
+        <h2>PHIẾU ĐỀ NGHỊ XUẤT KHO</h2>
+
+        <div class="info">
+            <p>Người đề nghị: .................................................. Bộ Phận: ..................................................</p>
+            <p>Mục đích sử dụng: ..............................................................................................................................</p>
         </div>
-        <p style="text-align: right; margin-top: 10px;">
-            Bình Minh, Ngày ......... Tháng ........... Năm 2024.
-        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>TÊN VẬT TƯ</th>
+                    <th>ĐVT</th>
+                    <th>SỐ LƯỢNG</th>
+                    <th>GHI CHÚ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>2</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>3</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>4</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>5</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>6</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>7</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>8</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>9</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>10</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>11</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>12</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>13</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>14</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>15</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>16</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>17</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>18</td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+
+        <p class="date">Bình Minh, Ngày ..... Tháng ..... Năm .....</p>
+
         <div class="signatures">
             <div>
-                <p>Thủ Kho</p>
+                <p>Ban Giám Đốc</p>
+                <p class="signatures-note">(Ký, ghi rõ họ tên)</p>
             </div>
             <div>
                 <p>Người Kiểm Tra</p>
+                <p class="signatures-note">(Ký, ghi rõ họ tên)</p>
             </div>
             <div>
                 <p>Người Đề Nghị</p>
+                <p class="signatures-note">(Ký, ghi rõ họ tên)</p>
             </div>
         </div>
-
-
     </div>
 </body>
 </html>
