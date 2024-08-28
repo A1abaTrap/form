@@ -89,6 +89,7 @@
                     if (response.ok) {
                         documentFrame.src = documentSrc;
                         documentViewer.style.display = 'block';
+                        document.getElementsByClassName("print-btn")[0].style.display = "block";  // Hiển thị nút in
                     } else {
                         // Nếu file không tồn tại, chuyển hướng tới trang lỗi
                         documentFrame.src = 'error.html';
