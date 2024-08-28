@@ -73,38 +73,6 @@
         <button class="print-btn" onclick="printDocument()">IN</button>
     </div>
 
-<!--     <script>
-        const documentList = document.getElementById('documentList');
-        const documentViewer = document.getElementById('documentViewer');
-        const documentFrame = document.getElementById('documentFrame');
-        const searchInput = document.getElementById('searchInput');
-
-        documentList.addEventListener('click', function(e) {
-            if (e.target && e.target.nodeName === "LI") {
-                const documentSrc = e.target.getAttribute('data-document');
-                documentFrame.src = documentSrc;
-                documentViewer.style.display = 'block';
-            }
-        });
-
-        searchInput.addEventListener('keyup', function() {
-            const filter = searchInput.value.toLowerCase();
-            const items = documentList.getElementsByTagName('li');
-
-            for (let i = 0; i < items.length; i++) {
-                const txtValue = items[i].textContent || items[i].innerText;
-                if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                    items[i].style.display = "";
-                } else {
-                    items[i].style.display = "none";
-                }
-            }
-        });
-
-        function printDocument() {
-            documentFrame.contentWindow.print();
-        }
-    </script> -->
     <script>
     const documentList = document.getElementById('documentList');
     const documentViewer = document.getElementById('documentViewer');
@@ -125,12 +93,14 @@
                         // Nếu file không tồn tại, chuyển hướng tới trang lỗi
                         documentFrame.src = 'error.html';
                         documentViewer.style.display = 'block';
+                        document.getElementsByClassName("print-btn")[0].style.display = "none";  // Ẩn nút in
                     }
                 })
                 .catch(error => {
                     // Nếu có lỗi, cũng chuyển hướng tới trang lỗi
                     documentFrame.src = 'error.html';
                     documentViewer.style.display = 'block';
+                    document.getElementsByClassName("print-btn")[0].style.display = "none";  // Ẩn nút in
                 });
         }
     });
