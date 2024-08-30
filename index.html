@@ -73,16 +73,71 @@
     </div>
 
     <script>
-    const documentList = document.getElementById('documentList');
-    const documentViewer = document.getElementById('documentViewer');
-    const documentFrame = document.getElementById('documentFrame');
-    const searchInput = document.getElementById('searchInput');
+    // const documentList = document.getElementById('documentList');
+    // const documentViewer = document.getElementById('documentViewer');
+    // const documentFrame = document.getElementById('documentFrame');
+    // const searchInput = document.getElementById('searchInput');
 
-    documentList.addEventListener('click', function(e) {
-        if (e.target && e.target.nodeName === "LI") {
-            const documentSrc = e.target.getAttribute('data-document');
+    // documentList.addEventListener('click', function(e) {
+    //     if (e.target && e.target.nodeName === "LI") {
+    //         const documentSrc = e.target.getAttribute('data-document');
 
-            // Kiểm tra xem file có tồn tại hay không
+    //         // Kiểm tra xem file có tồn tại hay không
+    //         fetch(documentSrc, { method: 'HEAD' })
+    //             .then(response => {
+    //                 if (response.ok) {
+    //                     documentFrame.src = documentSrc;
+    //                     documentViewer.style.display = 'block';
+    //                     document.getElementsByClassName("print-btn")[0].style.display = "block";  // Hiển thị nút in
+    //                 } else {
+    //                     // Nếu file không tồn tại, chuyển hướng tới trang lỗi
+    //                     documentFrame.src = 'error.html';
+    //                     documentViewer.style.display = 'block';
+    //                     document.getElementsByClassName("print-btn")[0].style.display = "none";  // Ẩn nút in
+    //                 }
+    //             })
+    //             .catch(error => {
+    //                 // Nếu có lỗi, cũng chuyển hướng tới trang lỗi
+    //                 documentFrame.src = 'error.html';
+    //                 documentViewer.style.display = 'block';
+    //                 document.getElementsByClassName("print-btn")[0].style.display = "none";  // Ẩn nút in
+    //             });
+    //     }
+    // });
+
+    // searchInput.addEventListener('keyup', function() {
+    //     const filter = searchInput.value.toLowerCase();
+    //     const items = documentList.getElementsByTagName('li');
+
+    //     for (let i = 0; i < items.length; i++) {
+    //         const txtValue = items[i].textContent || items[i].innerText;
+    //         if (txtValue.toLowerCase().indexOf(filter) > -1) {
+    //             items[i].style.display = "";
+    //         } else {
+    //             items[i].style.display = "none";
+    //         }
+    //     }
+    // });
+
+    // function printDocument() {
+    //     documentFrame.contentWindow.print();
+    // }
+        const documentList = document.getElementById('documentList');
+const documentViewer = document.getElementById('documentViewer');
+const documentFrame = document.getElementById('documentFrame');
+const searchInput = document.getElementById('searchInput');
+
+documentList.addEventListener('click', function(e) {
+    if (e.target && e.target.nodeName === "LI") {
+        const documentSrc = e.target.getAttribute('data-document');
+
+        // Kiểm tra xem frame hiện tại có đang hiển thị tài liệu không
+        if (documentViewer.style.display === 'block' && documentFrame.src === documentSrc) {
+            // Nếu có, đóng form
+            documentViewer.style.display = 'none';
+            document.getElementsByClassName("print-btn")[0].style.display = "none";  // Ẩn nút in
+        } else {
+            // Nếu không, hiển thị form
             fetch(documentSrc, { method: 'HEAD' })
                 .then(response => {
                     if (response.ok) {
@@ -103,25 +158,27 @@
                     document.getElementsByClassName("print-btn")[0].style.display = "none";  // Ẩn nút in
                 });
         }
-    });
-
-    searchInput.addEventListener('keyup', function() {
-        const filter = searchInput.value.toLowerCase();
-        const items = documentList.getElementsByTagName('li');
-
-        for (let i = 0; i < items.length; i++) {
-            const txtValue = items[i].textContent || items[i].innerText;
-            if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                items[i].style.display = "";
-            } else {
-                items[i].style.display = "none";
-            }
-        }
-    });
-
-    function printDocument() {
-        documentFrame.contentWindow.print();
     }
+});
+
+searchInput.addEventListener('keyup', function() {
+    const filter = searchInput.value.toLowerCase();
+    const items = documentList.getElementsByTagName('li');
+
+    for (let i = 0; i < items.length; i++) {
+        const txtValue = items[i].textContent || items[i].innerText;
+        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+            items[i].style.display = "";
+        } else {
+            items[i].style.display = "none";
+        }
+    }
+});
+
+function printDocument() {
+    documentFrame.contentWindow.print();
+}
+
 </script>
 
 </body>
