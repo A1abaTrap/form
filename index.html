@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý giấy tờ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .search-bar {
+            width: 100%;
+            height: 35px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 20px;
+        }
+        .document-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .document-item {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .document-item:hover {
+            background-color: #f0f0f0;
+        }
+        .document-viewer {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            display: none; /* Ẩn ban đầu */
+        }
+        .print-btn {
+            margin-top: 20px;
+            height: 35px;
+            width: 100%;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .print-btn:hover {
+            background-color: #ff0000;
+            color: #fe0;
+            font-size: x-large;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quản lý giấy tờ</h1>
+    <input type="text" id="searchInput" class="search-bar" placeholder="Tìm kiếm giấy tờ...">
+
+    <ul id="documentList" class="document-list">
+        <li class="document-item" data-document="mau-giay-xuat-kho-a4.html">Mẫu Giấy Xuất Kho A4</li>
+        <li class="document-item" data-document="mau-don-xin-nghi-phep.html">Mẫu Đơn Xin Nghỉ Phép</li>
+        <li class="document-item" data-document="mau-don-xin-nghi-viec.html">Mẫu Đơn Xin Nghỉ Việc</li>
+        <li class="document-item" data-document="mau-giay-xuat-kho-a5.html">Mẫu Giấy Xuất Kho A5</li>
+        <li class="document-item" data-document="mau-giay-de-nghi-thanh-toan-a5.html">Mẫu Giấy Đề Nghị Thanh Toán A5</li>
+        <li class="document-item" data-document="mau-giay-bien-ban-su-viec.html">Mẫu Giấy Biên Bản Sự Việc</li>
+        <li class="document-item" data-document="mau-giay-cat-may-kfc.html">Mẫu Giấy Cắt Máy KFC</li>
+        <li class="document-item" data-document="mau-giay-cat-may-TP.html">Mẫu Giấy Cắt Máy TP</li>
+        <li class="document-item" data-document="mau-giay-bao-cao-nhan-su.html">Mẫu Giấy Báo Cáo Nhân Sự</li>
+        <!-- Thêm các mục giấy tờ khác ở đây -->
+    </ul>
+
+    <div id="documentViewer" class="document-viewer hidden">
+        <iframe id="documentFrame" src="" width="100%" height="500px"></iframe>
+        <button class="print-btn" onclick="printDocument()">IN</button>
+    </div>
+
+    <script>
+        const documentList = document.getElementById('documentList');
+        const documentViewer = document.getElementById('documentViewer');
+        const documentFrame = document.getElementById('documentFrame');
+        const searchInput = document.getElementById('searchInput');
+        let currentDocument = null;
+
+        documentList.addEventListener('click', function(e) {
+            if (e.target && e.target.nodeName === "LI") {
+                const documentSrc = e.target.getAttribute('data-document');
+
+                if (currentDocument === documentSrc) {
+                    // Nếu tài liệu đã mở thì ẩn form
+                    documentViewer.classList.toggle('hidden');
+                } else {
+                    // Nếu tài liệu khác được chọn, hiển thị form với tài liệu mới
+                    fetch(documentSrc, { method: 'HEAD' })
+                        .then(response => {
+                            if (response.ok) {
+                                documentFrame.src = documentSrc;
+                                documentViewer.classList.remove('hidden');
+                                currentDocument = documentSrc;
+                            } else {
+                                documentFrame.src = 'error.html';
+                                documentViewer.classList.remove('hidden');
+                            }
+                        })
+                        .catch(error => {
+                            documentFrame.src = 'error.html';
+                            documentViewer.classList.remove('hidden');
+                        });
+                }
+            }
+        });
+
+        searchInput.addEventListener('keyup', function() {
+            const filter = searchInput.value.toLowerCase();
+            const items = documentList.getElementsByTagName('li');
+
+            for (let i = 0; i < items.length; i++) {
+                const txtValue = items[i].textContent || items[i].innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        });
+
+        function printDocument() {
+            documentFrame.contentWindow.print();
+        }
+    </script>
+</body>
+</html>
