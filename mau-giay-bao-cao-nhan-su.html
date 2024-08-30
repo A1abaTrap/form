@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Báo Cáo Nhân Sự</title>
     <style>
+    *{
+    	padding: 0;
+        margin: 0;        
+    }
         body {
             font-family: "Times New Roman", serif;
             margin: 0;
-            padding: 20px;
         }
         .container {
             width: 100%;
@@ -19,9 +22,7 @@
         }
         .header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
+			justify-content: space-around
         }
         .header img {
             width: 150px;
@@ -45,6 +46,9 @@
         }
         th {
             background-color: #f2f2f2;
+        }
+        .name-group{
+        text-align: left
         }
         .notes {
             margin-top: 10px;
@@ -72,7 +76,7 @@
             <img src="https://a1abatrap.github.io/form/logofull-.png" alt="Bình Minh">
             <div>
                 <p><strong>BÁO CÁO NHÂN SỰ LÀM VIỆC XƯỞNG SẢN XUẤT</strong></p>
-                <p>Ngày........... Tháng...........Năm.......</p>
+                <p>Ngày....................... Tháng..................Năm...............</p>
             </div>
         </div>
 
@@ -80,22 +84,22 @@
             <thead>
                 <tr>
                     <th>Stt</th>
-                    <th>Tên Tổ</th>
-                    <th>Số NV Cần Đủ</th>
-                    <th>Tổng NV Hiện Có</th>
-                    <th>CA SÁNG</th>
-                    <th>CA CHIỀU</th>
-                    <th>CN TV</th>
-                    <th>Nghỉ phiên</th>
-                    <th>Nghỉ việc riêng</th>
-                    <th>Nghỉ không phép</th>
-                    <th>Ghi chú<br>(tên nhân viên nghỉ không phép)</br></th>
+                    <th style="width:200px">Tên Tổ</th>
+                    <th style="width:20px">Số NV Cần Đủ</th>
+                    <th style="width:50px">Tổng NV Hiện Có</th>
+                    <th style="width:50px">CA SÁNG</th>
+                    <th style="width:50px">CA CHIỀU</th>
+                    <th style="width:50px">CN TV</th>
+                    <th style="width:50px">Nghỉ phiên</th>
+                    <th style="width:50px">Nghỉ việc riêng</th>
+                    <th style="width:50px">Nghỉ không phép</th>
+                    <th style="width:250px">Ghi chú<br>(tên nhân viên nghỉ không phép)</br></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td>Tổ Nguyên Liệu</td>
+                    <td class="name-group">Tổ Nguyên Liệu</td>
                     <td>9</td>
                     <td></td>
                     <td></td>
@@ -108,7 +112,7 @@
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>Tổ Sơ Chế</td>
+                    <td class="name-group">Tổ Sơ Chế</td>
                     <td>22</td>
                     <td></td>
                     <td></td>
@@ -121,7 +125,7 @@
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td>Tổ KFC</td>
+                    <td class="name-group">Tổ KFC</td>
                     <td>20</td>
                     <td></td>
                     <td></td>
@@ -134,7 +138,7 @@
                 </tr>
                 <tr>
                     <td>4</td>
-                    <td>Tổ Phá Lóc</td>
+                    <td class="name-group">Tổ Phá Lóc</td>
                     <td>10</td>
                     <td></td>
                     <td></td>
@@ -147,7 +151,7 @@
                 </tr>
                 <tr>
                     <td>5</td>
-                    <td>Tổ Thành phẩm</td>
+                    <td class="name-group">Tổ Thành phẩm</td>
                     <td>30</td>
                     <td></td>
                     <td></td>
@@ -160,7 +164,7 @@
                 </tr>
                 <tr>
                     <td>6</td>
-                    <td>Thống kê, Bao Bì</td>
+                    <td class="name-group">Thống kê, Bao Bì</td>
                     <td>5</td>
                     <td></td>
                     <td></td>
@@ -173,7 +177,7 @@
                 </tr>
                 <tr>
                     <td>7</td>
-                    <td>Tổ Bảo Trì, Xịt Sọt</td>
+                    <td class="name-group">Tổ Bảo Trì, Xịt Sọt</td>
                     <td>4</td>
                     <td></td>
                     <td></td>
@@ -186,7 +190,7 @@
                 </tr>
                 <tr>
                     <td colspan="2"><strong>TỔNG CỘNG</strong></td>
-                    <td><strong>100</strong></td>
+                    <td ><strong>100</strong></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -196,13 +200,14 @@
                     <td></td>
                     <td></td>
                 </tr>
+                <tr>
+                   <td colspan="10"><strong>TỔNG PHẦN CƠM TRONG NGÀY </strong></td>
+                </tr>
             </tbody>
         </table>
 
         <div class="notes">
-            <p><strong>Ghi:</strong> Người mới vào (Nhân Viên)......................... Người đi nghỉ việc........................................</p>
-            <p><strong>Chú:</strong> Người đến Ngày nghỉ việc.........................</p>
-            <p>Tổng Công Nhân Ăn Cơm/Ngày: .........................</p>
+            <p><strong>Ghi Chú:</strong> Người mới vào (Nhân Viên)....................................................................................................................................................................................Người</p>
         </div>
 
         <div class="signatures">
