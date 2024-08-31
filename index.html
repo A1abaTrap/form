@@ -10,11 +10,11 @@
             margin: 20px;
         }
         .search-bar {
-            width: 100%;
-            height: 35px;
-            border-radius: 20px;
-            text-align: center;
-            font-size: 20px;
+        width: 100%;
+        height: 35px;
+        border-radius: 20px;
+        text-align: center;
+        font-size: 20px;
         }
         .document-list {
             list-style-type: none;
@@ -34,22 +34,19 @@
             margin-top: 20px;
             padding: 20px;
             border: 1px solid #ddd;
-            display: none; /* Ẩn ban đầu */
+            display: none;
         }
         .print-btn {
             margin-top: 20px;
             height: 35px;
             width: 100%;
             border-radius: 10px;
-            cursor: pointer;
-        }
-        .print-btn:hover {
+            cursor: pointer
+         }
+        .print-btn:hover{
             background-color: #ff0000;
             color: #fe0;
             font-size: x-large;
-        }
-        .hidden {
-            display: none;
         }
     </style>
 </head>
@@ -70,63 +67,77 @@
         <!-- Thêm các mục giấy tờ khác ở đây -->
     </ul>
 
-    <div id="documentViewer" class="document-viewer hidden">
+    <div id="documentViewer" class="document-viewer">
         <iframe id="documentFrame" src="" width="100%" height="500px"></iframe>
         <button class="print-btn" onclick="printDocument()">IN</button>
     </div>
 
     <script>
-        const documentList = document.getElementById('documentList');
-        const documentViewer = document.getElementById('documentViewer');
-        const documentFrame = document.getElementById('documentFrame');
-        const searchInput = document.getElementById('searchInput');
-        let currentDocument = null;
+  const documentList = document.getElementById('documentList');
+const documentViewer = document.getElementById('documentViewer');
+const documentFrame = document.getElementById('documentFrame');
+const searchInput = document.getElementById('searchInput');
+const printButton = document.getElementsByClassName("print-btn")[0];
+let currentDocument = null;
 
-        documentList.addEventListener('click', function(e) {
-            if (e.target && e.target.nodeName === "LI") {
-                const documentSrc = e.target.getAttribute('data-document');
+documentList.addEventListener('click', function(e) {
+    if (e.target && e.target.nodeName === "LI") {
+        const documentSrc = e.target.getAttribute('data-document');
 
-                if (currentDocument === documentSrc) {
-                    // Nếu tài liệu đã mở thì ẩn form
-                    documentViewer.classList.toggle('hidden');
-                } else {
-                    // Nếu tài liệu khác được chọn, hiển thị form với tài liệu mới
-                    fetch(documentSrc, { method: 'HEAD' })
-                        .then(response => {
-                            if (response.ok) {
-                                documentFrame.src = documentSrc;
-                                documentViewer.classList.remove('hidden');
-                                currentDocument = documentSrc;
-                            } else {
-                                documentFrame.src = 'error.html';
-                                documentViewer.classList.remove('hidden');
-                            }
-                        })
-                        .catch(error => {
-                            documentFrame.src = 'error.html';
-                            documentViewer.classList.remove('hidden');
-                        });
-                }
-            }
-        });
-
-        searchInput.addEventListener('keyup', function() {
-            const filter = searchInput.value.toLowerCase();
-            const items = documentList.getElementsByTagName('li');
-
-            for (let i = 0; i < items.length; i++) {
-                const txtValue = items[i].textContent || items[i].innerText;
-                if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                    items[i].style.display = "";
-                } else {
-                    items[i].style.display = "none";
-                }
-            }
-        });
-
-        function printDocument() {
-            documentFrame.contentWindow.print();
+        // Kiểm tra nếu tài liệu hiện tại đang mở và là tài liệu được click
+        if (currentDocument === documentSrc && documentViewer.style.display === 'block') {
+            // Ẩn form và nút in
+            documentViewer.style.display = 'none';
+            printButton.style.display = 'none';
+            currentDocument = null; // Reset lại tài liệu hiện tại
+        } else {
+            // Hiển thị tài liệu mới
+            fetch(documentSrc, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        documentFrame.src = documentSrc;
+                        documentViewer.style.display = 'block';
+                        printButton.style.display = 'block';
+                        currentDocument = documentSrc;
+                    } else {
+                        // Nếu tài liệu không hợp lệ, chuyển đến trang lỗi
+                        documentFrame.src = 'error.html';
+                        documentViewer.style.display = 'block';
+                        printButton.style.display = 'none';
+                        currentDocument = null; // Đặt lại tài liệu hiện tại nếu có lỗi
+                    }
+                })
+                .catch(error => {
+                    // Trong trường hợp có lỗi khi fetch tài liệu
+                    documentFrame.src = 'error.html';
+                    documentViewer.style.display = 'block';
+                    printButton.style.display = 'none';
+                    currentDocument = null;
+                });
         }
-    </script>
+    }
+});
+
+searchInput.addEventListener('keyup', function() {
+    const filter = searchInput.value.toLowerCase();
+    const items = documentList.getElementsByTagName('li');
+
+    for (let i = 0; i < items.length; i++) {
+        const txtValue = items[i].textContent || items[i].innerText;
+        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+            items[i].style.display = "";
+        } else {
+            items[i].style.display = "none";
+        }
+    }
+});
+
+function printDocument() {
+    documentFrame.contentWindow.print();
+}
+
+ 
+</script>
+
 </body>
 </html>
