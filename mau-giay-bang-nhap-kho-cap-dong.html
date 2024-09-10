@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Nhập Kho Cấp Đông</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Định dạng trang */
+        body {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+
+        .report-table {
+            width: 210mm; /* Chiều rộng khổ A4 */
+            height: 297mm; /* Chiều cao khổ A4 */
+            padding: 5mm;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        .report-header {
+            text-align: center;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .report-header h1 {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .report-header .logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .report-header .logo img {
+            width: 100px;
+        }
+
+        .info {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .info span {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            padding-bottom: 15px;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        .footer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer div {
+            text-align: center;
+            width: 33%;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="report-table">
+    <div class="report-header">
+        <div class="logo">
+            <img src="https://a1abatrap.github.io/form/logofull-.png" alt="Bình Minh">
+        </div>
+        <h1>BẢNG NHẬP KHO CẤP ĐÔNG</h1>
+    </div>
+
+    <div class="info">
+        <span>MẺ:................................</span>
+        <span>NGÀY:................................</span>
+        <span>THÁNG:..............................</span>
+        <span>NĂM: 202.......</span>
+    </div>
+
+    <table>
+        <tr>
+            <th rowspan="2">STT</th>
+            <th rowspan="2" style="width:250px">TÊN SẢN PHẨM</th>
+            <th colspan="2">SỐ LƯỢNG NHẬP</th>
+            <th rowspan="2">GHI CHÚ</th>
+        </tr>
+        <tr>
+            <th style="width:100px">ĐƠN VỊ TÍNH</th>
+            <th>SỐ LƯỢNG (KG)</th>
+        </tr>
+        <!-- Lặp các dòng -->
+        <tr>
+            <td>1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <!-- Tiếp tục cho đến 20 -->
+        <tr>
+            <td>4</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>16</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>18</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        
+        <!-- Thêm các dòng khác ở đây -->
+    </table>
+
+    <div class="footer">
+        <div>TRƯỞNG CA SX</div>
+        <div>THỐNG KÊ XƯỞNG</div>
+        <div>NGƯỜI LẬP BẢNG</div>
+    </div>
+</div>
+
+</body>
+</html>
