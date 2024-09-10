@@ -5,21 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý giấy tờ</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
         }
+
+        /* Container chứa cả danh sách và form */
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Sidebar (danh sách ở bên trái) */
+        .sidebar {
+            width: 33.33%; /* Chiếm 1/3 màn hình */
+            background-color: #f7f7f7;
+            padding: 20px;
+            overflow-y: auto; /* Thanh cuộn dọc khi danh sách dài */
+            height: 100vh;
+        }
+
+        /* Phần hiển thị form (bên phải) */
+        .document-viewer-container {
+            width: 66.67%; /* Chiếm 2/3 màn hình */
+            padding: 20px;
+            overflow-y: auto;
+        }
+
         .search-bar {
-        width: 100%;
-        height: 35px;
-        border-radius: 20px;
-        text-align: center;
-        font-size: 20px;
+            width: 100%;
+            height: 35px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 18px;
         }
+
         .document-list {
             list-style-type: none;
             padding: 0;
+            margin-top: 20px;
         }
+
         .document-item {
             padding: 10px;
             border: 1px solid #ccc;
@@ -27,127 +60,129 @@
             cursor: pointer;
             border-radius: 10px;
         }
+
         .document-item:hover {
             background-color: #f0f0f0;
         }
+
         .document-viewer {
-            margin-top: 20px;
             padding: 20px;
             border: 1px solid #ddd;
-            display: none;
+            display: none; /* Ban đầu ẩn form */
         }
+
         .print-btn {
             margin-top: 20px;
             height: 35px;
             width: 100%;
             border-radius: 10px;
-            cursor: pointer
-         }
-        .print-btn:hover{
+            cursor: pointer;
+        }
+
+        .print-btn:hover {
             background-color: #ff0000;
             color: #fe0;
             font-size: x-large;
         }
+
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="header-left">
-            <img src="https://a1abatrap.github.io/form/logofull-.png" alt="Bình Minh" width="200">
+    <div class="container">
+        <!-- Sidebar (Danh sách các mục) -->
+        <div class="sidebar">
+            <div class="header-left">
+                <img src="https://a1abatrap.github.io/form/logofull-.png" alt="Bình Minh" width="200">
+            </div>
+            <h2 style="text-align: center">Quản lý giấy tờ</h2>
+            <input type="text" id="searchInput" class="search-bar" placeholder="Tìm kiếm giấy tờ...">
+
+            <ul id="documentList" class="document-list">
+                <li class="document-item" data-document="mau-giay-xuat-kho-a4.html">Mẫu Giấy Xuất Kho A4</li>
+                <li class="document-item" data-document="mau-don-xin-nghi-phep.html">Mẫu Đơn Xin Nghỉ Phép</li>
+                <li class="document-item" data-document="mau-don-xin-nghi-viec.html">Mẫu Đơn Xin Nghỉ Việc</li>
+                <li class="document-item" data-document="mau-giay-xuat-kho-a5.html">Mẫu Giấy Xuất Kho A5</li>
+                <li class="document-item" data-document="mau-giay-cat-may-kfc.html">Mẫu Giấy Cắt Máy KFC</li>
+                <li class="document-item" data-document="mau-giay-cat-may-TP.html">Mẫu Giấy Cắt Máy TP</li>
+                <li class="document-item" data-document="mau-giay-bao-cao-nhan-su.html">Mẫu Giấy Báo Cáo Nhân Sự</li>
+                <li class="document-item" data-document="mau-giay-bao-cao-giet-mo.html">Mẫu Giấy Báo Cáo Giết Mổ</li>
+                <li class="document-item" data-document="mau-giay-can-chuyen.html">Mẫu Giấy Cân chuyền</li>
+                <li class="document-item" data-document="mau-giay-bang-nhap-kho-cap-dong.html">Mẫu Giấy Bảng Nhập Kho Cấp Đông</li>
+                <li class="document-item" data-document="mau-giay-phieu-bao-cao-hang-tuoi-dong.html">Mẫu Giấy Báo Cáo Hàng Tươi/Đông</li>
+                <li class="document-item" data-document="mau-giay-bang-doi-chieu-hang-ton-kho-ban-thanh-pham.html">Mẫu Giấy Bảng Đối Chiếu Hàng Tồn Kho Bán Thành phẩm</li>
+                <li class="document-item" data-document="mau-giay-de-nghi-thanh-toan-a5.html">Mẫu Giấy Đề Nghị Thanh Toán A5</li>
+                <li class="document-item" data-document="mau-giay-bien-ban-su-viec.html">Mẫu Giấy Biên Bản Sự Việc</li>
+            </ul>
         </div>
-    <h1 style="text-align: center">Quản lý giấy tờ</h1>
-    <input type="text" id="searchInput" class="search-bar" placeholder="Tìm kiếm giấy tờ...">
 
-    <ul id="documentList" class="document-list">
-        <li class="document-item" data-document="mau-giay-xuat-kho-a4.html">Mẫu Giấy Xuất Kho A4</li>
-        <li class="document-item" data-document="mau-don-xin-nghi-phep.html">Mẫu Đơn Xin Nghỉ Phép</li>
-        <li class="document-item" data-document="mau-don-xin-nghi-viec.html">Mẫu Đơn Xin Nghỉ Việc</li>
-        <li class="document-item" data-document="mau-giay-xuat-kho-a5.html">Mẫu Giấy Xuất Kho A5</li>
-        <li class="document-item" data-document="mau-giay-cat-may-kfc.html">Mẫu Giấy Cắt Máy KFC</li>
-        <li class="document-item" data-document="mau-giay-cat-may-TP.html">Mẫu Giấy Cắt Máy TP</li>
-        <li class="document-item" data-document="mau-giay-bao-cao-nhan-su.html">Mẫu Giấy Báo Cáo Nhân Sự</li>
-        <li class="document-item" data-document="mau-giay-bao-cao-giet-mo.html">Mẫu Giấy Báo Cáo Giết Mổ</li>
-        <li class="document-item" data-document="mau-giay-can-chuyen.html">Mẫu Giấy Cân chuyền</li>
-
-        <li class="document-item" data-document="mau-giay-bang-nhap-kho-cap-dong.html">Mẫu Giấy Bảng Nhập Kho Cấp Đông</li>
-        <li class="document-item" data-document="mau-giay-phieu-bao-cao-hang-tuoi-dong.html">Mẫu Giấy Báo Cáo Hàng Tươi/Đông</li>
-        <li class="document-item" data-document="mau-giay-bang-doi-chieu-hang-ton-kho-ban-thanh-pham.html">Mẫu Giấy Bảng Đối Chiếu Hàng Tồn Kho Bán Thành phẩm</li>        
-        <li class="document-item" data-document="mau-giay-de-nghi-thanh-toan-a5.html">Mẫu Giấy Đề Nghị Thanh Toán A5</li>
-        <li class="document-item" data-document="mau-giay-bien-ban-su-viec.html">Mẫu Giấy Biên Bản Sự Việc</li>
-        <!-- Thêm các mục giấy tờ khác ở đây -->
-    </ul>
-
-    <div id="documentViewer" class="document-viewer">
-        <iframe id="documentFrame" src="" width="100%" height="500px"></iframe>
-        <button class="print-btn" onclick="printDocument()">IN</button>
+        <!-- Form hiển thị nội dung giấy tờ -->
+        <div class="document-viewer-container">
+            <div id="documentViewer" class="document-viewer">
+                <iframe id="documentFrame" src="" width="100%" height="500px"></iframe>
+                <button class="print-btn" onclick="printDocument()">IN</button>
+            </div>
+        </div>
     </div>
 
     <script>
-  const documentList = document.getElementById('documentList');
-const documentViewer = document.getElementById('documentViewer');
-const documentFrame = document.getElementById('documentFrame');
-const searchInput = document.getElementById('searchInput');
-const printButton = document.getElementsByClassName("print-btn")[0];
-let currentDocument = null;
+        const documentList = document.getElementById('documentList');
+        const documentViewer = document.getElementById('documentViewer');
+        const documentFrame = document.getElementById('documentFrame');
+        const searchInput = document.getElementById('searchInput');
+        const printButton = document.getElementsByClassName("print-btn")[0];
+        let currentDocument = null;
 
-documentList.addEventListener('click', function(e) {
-    if (e.target && e.target.nodeName === "LI") {
-        const documentSrc = e.target.getAttribute('data-document');
+        documentList.addEventListener('click', function(e) {
+            if (e.target && e.target.nodeName === "LI") {
+                const documentSrc = e.target.getAttribute('data-document');
 
-        // Kiểm tra nếu tài liệu hiện tại đang mở và là tài liệu được click
-        if (currentDocument === documentSrc && documentViewer.style.display === 'block') {
-            // Ẩn form và nút in
-            documentViewer.style.display = 'none';
-            printButton.style.display = 'none';
-            currentDocument = null; // Reset lại tài liệu hiện tại
-        } else {
-            // Hiển thị tài liệu mới
-            fetch(documentSrc, { method: 'HEAD' })
-                .then(response => {
-                    if (response.ok) {
-                        documentFrame.src = documentSrc;
-                        documentViewer.style.display = 'block';
-                        printButton.style.display = 'block';
-                        currentDocument = documentSrc;
-                    } else {
-                        // Nếu tài liệu không hợp lệ, chuyển đến trang lỗi
-                        documentFrame.src = 'error.html';
-                        documentViewer.style.display = 'block';
-                        printButton.style.display = 'none';
-                        currentDocument = null; // Đặt lại tài liệu hiện tại nếu có lỗi
-                    }
-                })
-                .catch(error => {
-                    // Trong trường hợp có lỗi khi fetch tài liệu
-                    documentFrame.src = 'error.html';
-                    documentViewer.style.display = 'block';
+                if (currentDocument === documentSrc && documentViewer.style.display === 'block') {
+                    documentViewer.style.display = 'none';
                     printButton.style.display = 'none';
                     currentDocument = null;
-                });
+                } else {
+                    fetch(documentSrc, { method: 'HEAD' })
+                        .then(response => {
+                            if (response.ok) {
+                                documentFrame.src = documentSrc;
+                                documentViewer.style.display = 'block';
+                                printButton.style.display = 'block';
+                                currentDocument = documentSrc;
+                            } else {
+                                documentFrame.src = 'error.html';
+                                documentViewer.style.display = 'block';
+                                printButton.style.display = 'none';
+                                currentDocument = null;
+                            }
+                        })
+                        .catch(error => {
+                            documentFrame.src = 'error.html';
+                            documentViewer.style.display = 'block';
+                            printButton.style.display = 'none';
+                            currentDocument = null;
+                        });
+                }
+            }
+        });
+
+        searchInput.addEventListener('keyup', function() {
+            const filter = searchInput.value.toLowerCase();
+            const items = documentList.getElementsByTagName('li');
+
+            for (let i = 0; i < items.length; i++) {
+                const txtValue = items[i].textContent || items[i].innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        });
+
+        function printDocument() {
+            documentFrame.contentWindow.print();
         }
-    }
-});
-
-searchInput.addEventListener('keyup', function() {
-    const filter = searchInput.value.toLowerCase();
-    const items = documentList.getElementsByTagName('li');
-
-    for (let i = 0; i < items.length; i++) {
-        const txtValue = items[i].textContent || items[i].innerText;
-        if (txtValue.toLowerCase().indexOf(filter) > -1) {
-            items[i].style.display = "";
-        } else {
-            items[i].style.display = "none";
-        }
-    }
-});
-
-function printDocument() {
-    documentFrame.contentWindow.print();
-}
-
- 
-</script>
+    </script>
 
 </body>
 </html>
