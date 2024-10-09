@@ -1,0 +1,211 @@
+<html lang="vi"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu Đề Nghị Xuất Kho</title>
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            /* Kích thước A5 nằm ngang */
+            max-width: 210mm;
+            max-height: 148mm;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+/*             margin-bottom: 20px; */
+        }
+        .header-left, .header-right {
+            width: 45%;
+        }
+        .header-center {
+            width: 10%;
+        }
+        .header-left p, .header-right p {
+            margin: 0;
+        }
+        .header-left {
+            text-align: left;
+        }
+        .header-right {
+            text-align: right;
+        }
+        h2 {
+            font-size: 18px;
+            text-align: center;
+            margin: 0;
+        }
+        .info {
+            line-height: 1.5;
+            font-size: 16px;
+        }
+        .info p {
+            margin: 5px 0;
+        }
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+/*             margin-top: 30px; */
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .signatures div {
+            text-align: center;
+            width: 30%;
+        }
+        .date {
+            text-align: right;
+            margin: 0;
+            font-style: italic;
+        }
+        .signatures-note {
+            margin-top: -10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+/*             margin-top: 20px; */
+            font-size: 16px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        .resize {
+    position: relative;
+}
+
+.resize-handle {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 5px;
+            height: 100%;
+            cursor: col-resize;
+            user-select: none;
+}
+
+    </style>
+</head>
+<body>
+   <div class="header-left">
+      <img src="https://a1abatrap.github.io/form/logofull-.png" alt="Bình Minh" width="150">
+   </div>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <p><strong>CÔNG TY CỔ PHẦN BMFOOD</strong></p>
+            </div>
+            <div class="header-right">
+            </div>
+        </div>
+
+        <h2>PHIẾU ĐỀ NGHỊ XUẤT KHO</h2>
+
+        <div class="info">
+            <p>Người đề nghị: .................................................. Bộ Phận: ..................................................</p>
+            <p>Mục đích sử dụng: ..............................................................................................................................</p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="resize">STT</th>
+                    <th class="resize">TÊN VẬT TƯ</th>
+                    <th class="resize">ĐVT</th>
+                    <th class="resize">SỐ LƯỢNG</th>
+                    <th class="resize">GHI CHÚ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>2</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>3</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>4</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>5</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>6</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>7</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>8</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>9</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>10</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>11</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>12</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>13</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>14</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>15</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>16</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>17</td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>18</td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+
+        <p class="date">Bình Minh, Ngày ..... Tháng ..... Năm .....</p>
+
+        <div class="signatures">
+            <div>
+                <p>Ban Giám Đốc</p>
+                <p class="signatures-note">(Ký, ghi rõ họ tên)</p>
+            </div>
+            <div>
+                <p>Người Kiểm Tra</p>
+                <p class="signatures-note">(Ký, ghi rõ họ tên)</p>
+            </div>
+            <div>
+                <p>Người Đề Nghị</p>
+                <p class="signatures-note">(Ký, ghi rõ họ tên)</p>
+            </div>
+        </div>
+    </div>
+<script>
+    const table = document.querySelector("table");
+    let startX, startWidth, resizableCol;
+
+    // Bắt đầu kéo
+    function startResize(e) {
+        resizableCol = e.target.parentElement;
+        startX = e.pageX;
+        startWidth = resizableCol.offsetWidth;
+        document.addEventListener("mousemove", resizeColumn);
+        document.addEventListener("mouseup", stopResize);
+    }
+
+    // Thay đổi kích thước
+    function resizeColumn(e) {
+        const newWidth = startWidth + (e.pageX - startX);
+        resizableCol.style.width = newWidth + "px";
+    }
+
+    // Dừng kéo
+    function stopResize() {
+        document.removeEventListener("mousemove", resizeColumn);
+        document.removeEventListener("mouseup", stopResize);
+    }
+
+    // Gắn sự kiện vào các thẻ th để cho phép kéo
+    document.querySelectorAll("th.resize").forEach(th => {
+        const resizeHandle = document.createElement("div");
+        resizeHandle.style.height = "100%";
+        resizeHandle.style.width = "5px";
+        resizeHandle.style.position = "absolute";
+        resizeHandle.style.right = "0";
+        resizeHandle.style.top = "0";
+        resizeHandle.style.cursor = "col-resize";
+        resizeHandle.addEventListener("mousedown", startResize);
+        th.appendChild(resizeHandle);
+        th.style.position = "relative";
+    });
+</script>
+
+
+</body></html>
