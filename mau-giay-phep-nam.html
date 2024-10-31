@@ -23,11 +23,12 @@
             margin: 0 auto;
             background-color: white;
             page-break-after: always;
-       }
+            padding: 20px;
+        }
 
         h2 {
             text-align: center;
-            font-size: 1.3em;
+            font-size: 1.2em;
             margin-bottom: 10px;
         }
 
@@ -49,8 +50,10 @@
             text-align: center;
         }
         p {
-            font-size: 16px;
+          font-size: 16px;
+          padding-left: 10px;
         }
+
         .note {
             margin-top: 10px;
             font-size: 0.9em;
@@ -82,8 +85,8 @@
             <div class="container">
                 <h2>PHIẾU ĐĂNG KÝ NGHỈ PHÉP NĂM 2024</h2>
                 <div class="info">
-                    <p><strong>Họ và Tên:</strong> ${employee.name}</p>
-                    <p><strong>Bộ phận:</strong> ${employee.department}</p>
+                    <p ><strong>Họ và Tên:</strong> <a style="font-size:20px; font-weight: bold; padding-left: 20%">${employee.name}</a></p>
+                    <p><strong>Bộ phận:</strong><a style="font-size:20px; font-weight: bold; padding-left: 20%"> ${employee.department}</a></p>
                 </div>
                 <table>
                     <tr>
@@ -105,9 +108,9 @@
                         </tr>`).join('')}
                 </table>
                 <div class="note">
-                    <p>Phép 2023 chuyển sang (hiệu lực đến __/__/2024): ........................ ngày</p>
-                    <p>Số ngày phép năm 2024 được hưởng: ........................ ngày</p>
-                    <p>Tổng số ngày phép được hưởng: ........................ ngày</p>
+                    <p>Phép 2023 chuyển sang (hiệu lực đến __/__/2024): ........................................... ngày</p>
+                    <p>Số ngày phép năm 2024 được hưởng: ................................................................. ngày</p>
+                    <p>Tổng số ngày phép được hưởng: ......................................................................... ngày</p>
                 </div>
             </div>
         `;
