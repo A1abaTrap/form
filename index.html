@@ -1,0 +1,155 @@
+<html lang="vi"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý giấy tờ</title>
+    <link rel="icon" href="https://a1abatrap.github.io/form/Ico64.ico">
+    <style>
+        * { box-sizing: border-box; transition: 0.3s ease; }
+        body { font-family: Arial, sans-serif; margin: 0; height: 100vh; display: flex; background-color: #f0f0f0; }
+        .container { display: flex; width: 100%; height: 100%; }
+        .sidebar { width: 33.33%; background-color: #fff; padding: 20px; overflow-y: auto; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); height: 100vh; display: flex; flex-direction: column; }
+        .document-list-container { flex-grow: 1; overflow-y: auto; padding-right: 10px; }
+        .document-list { list-style-type: none; padding: 0; margin: 0; }
+        .document-item { padding: 15px; background-color: #fff; margin-bottom: 10px; cursor: pointer; border-radius: 10px; font-size: 18px; color: #2E3A59; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease; }
+        .document-item:hover { background-color: #f0f0f0; transform: translateY(-5px); }
+        /*.document-viewer-container { width: 66.67%; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #f9f9f9; }*/
+.document-viewer-container { width: 66.67%; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #f9f9f9; background-image: url(https://actapp.misacdn.net/dn/event/img_20_10.png); background-position-y: bottom;background-repeat: no-repeat;}
+        .document-viewer { padding: 20px; border: 1px solid #ddd; width: 100%; height: 95%; display: none; background-color: #fff; }
+        .print-btn { margin-top: 20px; padding: 10px; width: 150px; border-radius: 10px; background-color: #ff0000; color: white; border: none; text-align: center; }
+        .print-btn:hover { background-color: #e60000; }
+        .search-bar {width: 100%; padding: 10px; border-radius: 20px; text-align: center; font-size: 16px; border: 1px solid #ccc;}
+.document-list-container::-webkit-scrollbar {width: 8px;border-radius: 10px; /* Bo góc cho cả thanh cuộn */}
+        .document-list-container::-webkit-scrollbar-track {background: #f0f0f0; /* Màu nền sáng nhẹ */border-radius: 10px; /* Bo góc track */}
+        .document-list-container::-webkit-scrollbar-thumb {background: linear-gradient(135deg, #c6d1e6, #a5b6d3); /* Màu gradient nhẹ nhàng */border-radius: 10px; /* Bo góc cho thanh trượt */box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2); /* Đổ bóng nhẹ bên trong */transition: background 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển động nhẹ */}
+        .document-list-container::-webkit-scrollbar-thumb:hover {background: linear-gradient(135deg, #b4c2de, #92a7c8); /* Màu nhạt hơn khi hover */box-shadow: 0 0 6px rgba(0, 0, 0, 0.15); /* Đổ bóng nhẹ khi hover */}
+        .document-list-container::-webkit-scrollbar-thumb:active {background: linear-gradient(135deg, #9fb5d4, #7d99b8); /* Màu đậm hơn khi kéo */box-shadow: 0 0 8px rgba(0, 0, 0, 0.25); /* Đổ bóng mạnh hơn khi kéo */}
+    .last-printed-date {
+    float: right;
+    font-size: 14px;
+    color: #888;
+    margin-left: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <img src="https://a1abatrap.github.io/form/logofull-.png" alt="Bình Minh" width="200">
+            <h2 style="text-align: center">Quản lý giấy tờ</h2>
+            <input type="text" id="searchInput" class="search-bar" placeholder="Tìm kiếm giấy tờ...">
+            <div class="document-list-container">
+                <ul id="documentList" class="document-list">
+                <li class="document-item" data-document="mau-giay-xuat-kho-a4.html">Mẫu Giấy Xuất Kho A4 <span class="last-printed-date"></span></li>
+                <li class="document-item" data-document="mau-don-xin-nghi-phep.html">Mẫu Đơn Xin Nghỉ Phép <span class="last-printed-date"></span></li>
+                <li class="document-item" data-document="mau-don-xin-nghi-viec.html">Mẫu Đơn Xin Nghỉ Việc <span class="last-printed-date"></span></li>
+                <li class="document-item" data-document="mau-giay-xuat-kho-a5.html">Mẫu Giấy Xuất Kho A5 <span class="last-printed-date"></span></li>
+                <li class="document-item" data-document="mau-giay-cat-may-kfc.html">Mẫu Giấy Cắt Máy KFC <span class="last-printed-date"></span></li>
+<li class="document-item" data-document="mau-giay-cat-may-TP.html">Mẫu Giấy Cắt Máy TP <span class="last-printed-date"></span></li>
+                <li class="document-item" data-document="mau-giay-bao-cao-nhan-su.html">Mẫu Giấy Báo Cáo Nhân Sự <span class="last-printed-date"></span></li>
+                <li class="document-item" data-document="mau-giay-bao-cao-giet-mo.html">Mẫu Giấy Báo Cáo Giết Mổ <span class="last-printed-date"></span></li>
+                <li class="document-item" data-document="mau-giay-can-chuyen.html">Mẫu Giấy Cân chuyền <span class="last-printed-date"></span></li>
+                <li class="document-item" data-document="mau-giay-bang-nhap-kho-cap-dong.html">Mẫu Giấy Bảng Nhập Kho Cấp Đông <span class="last-printed-date"></span></li>
+                <li class="document-item" data-document="mau-giay-phieu-bao-cao-hang-tuoi-dong.html">Mẫu Giấy Báo Cáo Hàng Tươi/Đông <span class="last-printed-date"></span></li>
+                <li class="document-item" data-document="mau-giay-bang-doi-chieu-hang-ton-kho-ban-thanh-pham.html">Mẫu Giấy Bảng Đối Chiếu Hàng Tồn Kho Bán Thành phẩm <span class="last-printed-date"></span></li>
+                <li class="document-item" data-document="mau-giay-de-nghi-thanh-toan-a5.html">Mẫu Giấy Đề Nghị Thanh Toán A5 <span class="last-printed-date"></span></li>
+                <li class="document-item" data-document="mau-giay-bien-ban-su-viec.html">Mẫu Giấy Biên Bản Sự Việc <span class="last-printed-date"></span></li>
+                        <!-- Thêm các mục khác ở đây -->
+                </ul>
+                <p id="noResult" style="display:none; color: red; text-align: center;">Không tìm thấy giấy tờ!</p>
+            </div>
+        </div>
+
+        <div class="document-viewer-container">
+            <div id="documentViewer" class="document-viewer">
+                <iframe id="documentFrame" src="" width="100%" height="100%"></iframe>
+                <button class="print-btn" onclick="printDocument()">IN</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const documentList = document.getElementById('documentList');
+        const documentViewer = document.getElementById('documentViewer');
+        const documentFrame = document.getElementById('documentFrame');
+        const searchInput = document.getElementById('searchInput');
+        const noResult = document.getElementById('noResult');
+        const printButton = document.getElementsByClassName("print-btn")[0];
+        let currentDocument = null;
+
+        documentList.addEventListener('click', function(e) {
+            if (e.target && e.target.nodeName === "LI") {
+                const documentSrc = e.target.getAttribute('data-document');
+                if (currentDocument === documentSrc && documentViewer.style.display === 'block') {
+                    documentViewer.style.display = 'none';
+                    printButton.style.display = 'none';
+                    currentDocument = null;
+                } else {
+                    fetch(documentSrc, { method: 'HEAD' })
+                        .then(response => {
+                            if (response.ok) {
+                                documentFrame.src = documentSrc;
+                                documentViewer.style.display = 'block';
+printButton.style.display = 'block';
+                                currentDocument = documentSrc;
+                            } else {
+                                documentFrame.src = 'error.html';
+                                documentViewer.style.display = 'block';
+                                printButton.style.display = 'none';
+                                currentDocument = null;
+                            }
+                        })
+                        .catch(() => {
+                            documentFrame.src = 'error.html';
+                            documentViewer.style.display = 'block';
+                            printButton.style.display = 'none';
+                            currentDocument = null;
+                        });
+                }
+            }
+        });
+
+        searchInput.addEventListener('keyup', function() {
+            const filter = searchInput.value.toLowerCase();
+            const items = documentList.getElementsByTagName('li');
+            let hasResult = false;
+
+            for (let i = 0; i < items.length; i++) {
+                const txtValue = items[i].textContent || items[i].innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    items[i].style.display = "";
+                    hasResult = true;
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+
+            noResult.style.display = hasResult ? 'none' : 'block';
+        });
+
+function printDocument() {
+    const docName = currentDocument;
+    documentFrame.contentWindow.print();
+
+    // Lưu ngày in gần nhất vào localStorage
+    const currentDate = new Date().toLocaleDateString('vi-VN');
+    localStorage.setItem(`lastPrinted_${docName}`, currentDate);
+
+    // Cập nhật ngày in gần nhất hiển thị
+    updateLastPrintedDates();
+}
+
+function updateLastPrintedDates() {
+    const items = documentList.getElementsByTagName('li');
+    for (let i = 0; i < items.length; i++) {
+        const docName = items[i].getAttribute('data-document');
+        const lastPrintedDate = localStorage.getItem(`lastPrinted_${docName}`);
+        const dateElement = items[i].querySelector('.last-printed-date');
+        dateElement.textContent = lastPrintedDate ? `In lần cuối: ${lastPrintedDate}` : '';
+    }
+}
+
+// Gọi hàm updateLastPrintedDates khi tải trang để hiển thị ngày in gần nhất cho mỗi tài liệu
+updateLastPrintedDates();
+    </script>
+
+</body></html>
