@@ -1,7 +1,9 @@
-<html lang="vi"><head>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phiếu Đăng Ký Nghỉ Phép Năm 2024</title>
+    <title>In Phiếu Đăng Ký Nghỉ Phép</title>
     <style>
         /* Đặt lại CSS */
         * {
@@ -16,49 +18,16 @@
             line-height: 1.5;
         }
 
-        ol, ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        button, input, textarea {
-            font-family: inherit;
-            font-size: 100%;
-            border: none;
-            outline: none;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        p {
-          font-size: 16px;
-        }
-
-        /* Định dạng in A5 */
-        @media print {
-            @page {
-                size: A5 portrait;
-                margin: 1cm;
-            }
-        }
-
-        /* Bố cục chính */
         .container {
             max-width: 100%;
             margin: 0 auto;
             background-color: white;
-        }
+            page-break-after: always;
+       }
 
         h2 {
             text-align: center;
-            font-size: 1.2em;
+            font-size: 1.3em;
             margin-bottom: 10px;
         }
 
@@ -79,7 +48,9 @@
             padding: 5px;
             text-align: center;
         }
-
+        p {
+            font-size: 16px;
+        }
         .note {
             margin-top: 10px;
             font-size: 0.9em;
@@ -87,42 +58,74 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>PHIẾU ĐĂNG KÝ NGHỈ PHÉP NĂM 2024</h2>
-        <div class="info">
-            <p><strong>Họ và Tên:</strong>...............................................................................................</p>
-            <p><strong>Bộ phận:</strong> ................................................................................................</p>
-        </div>
-        
-        <table>
-            <tbody><tr>
-                <th>Tháng</th>
-                <th style="width:120px">Ngày nghỉ</th>
-                <th>Nhân viên</th>
-                <th>Quản lý</th>
-                <th>Nhân sự</th>
-                <th>Ghi chú</th>
-            </tr>
-            <tr><td>01</td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td>02</td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td>03</td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td>04</td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td>05</td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td>06</td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td>07</td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td>08</td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td>09</td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td>10</td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td>11</td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td>12</td><td></td><td></td><td></td><td></td><td></td></tr>
-        </tbody></table>
 
-        <div class="note">
-            <p>Phép 2023 chuyển sang (hiệu lực đến __/__/2024): ................................ ngày</p>
-            <p>Số ngày phép năm 2024 được hưởng: ..................................................... ngày</p>
-            <p>Tổng số ngày phép được hưởng: ............................................................ ngày</p>
-        </div>
-    </div>
+<div id="content"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+<script>
+    const fileUrl = "https://raw.githubusercontent.com/A1abaTrap/form/main/danh_sach_PN.xlsx"; // Thay bằng link raw từ GitHub
 
-</body></html>
+    fetch(fileUrl)
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            const workbook = XLSX.read(data, { type: 'array' });
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+            
+            renderLeaveForms(jsonData);
+        })
+        .catch(error => console.error("Lỗi khi tải file Excel:", error));
+
+    function generateLeaveForm(employee) {
+        return `
+            <div class="container">
+                <h2>PHIẾU ĐĂNG KÝ NGHỈ PHÉP NĂM 2024</h2>
+                <div class="info">
+                    <p><strong>Họ và Tên:</strong> ${employee.name}</p>
+                    <p><strong>Bộ phận:</strong> ${employee.department}</p>
+                </div>
+                <table>
+                    <tr>
+                        <th>Tháng</th>
+                        <th style="width:120px">Ngày nghỉ</th>
+                        <th>Nhân viên</th>
+                        <th>Quản lý</th>
+                        <th>Nhân sự</th>
+                        <th>Ghi chú</th>
+                    </tr>
+                    ${Array.from({ length: 12 }, (_, i) => `
+                        <tr>
+                            <td>${(i + 1).toString().padStart(2, '0')}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>`).join('')}
+                </table>
+                <div class="note">
+                    <p>Phép 2023 chuyển sang (hiệu lực đến __/__/2024): ........................ ngày</p>
+                    <p>Số ngày phép năm 2024 được hưởng: ........................ ngày</p>
+                    <p>Tổng số ngày phép được hưởng: ........................ ngày</p>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderLeaveForms(data) {
+        const content = document.getElementById('content');
+        // Bỏ qua hàng đầu tiên nếu đó là tiêu đề cột
+        for (let i = 1; i < data.length; i++) {
+            const row = data[i];
+            const employee = {
+                name: row[1],      // Cột "Họ Và Tên"
+                department: row[2] // Cột "Bộ Phận"
+            };
+            content.innerHTML += generateLeaveForm(employee);
+        }
+    }
+</script>
+
+</body>
+</html>
