@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Phiếu Đăng Ký Nghỉ Phép</title>
+    <style>
+        /* Đặt lại CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-size: 100%;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            page-break-after: always;
+            padding: 5px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 5px;
+            text-align: center;
+        }
+        p {
+          font-size: 16px;
+          padding-left: 10px;
+        }
+
+        .note {
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<div id="content"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+<script>
+    const fileUrl = "https://raw.githubusercontent.com/A1abaTrap/form/main/danh_sach_PN.xlsx"; // Thay bằng link raw từ GitHub
+
+    fetch(fileUrl)
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            const workbook = XLSX.read(data, { type: 'array' });
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+            
+            renderLeaveForms(jsonData);
+        })
+        .catch(error => console.error("Lỗi khi tải file Excel:", error));
+
+   // Function lấy năm hiện tại
+function getCurrentYear() {
+    return new Date().getFullYear();
+}
+
+function generateLeaveForm(employee) {
+    const year = getCurrentYear(); // Lấy năm từ function
+    return `
+        <div class="container">
+            <h2>PHIẾU ĐĂNG KÝ NGHỈ PHÉP NĂM ${year}</h2>
+            <div class="info">
+                <p><strong>Họ và Tên:</strong> <a style="font-size:20px; font-weight: bold; padding-left: 20%">${employee.name}</a></p>
+                <p><strong>Bộ phận:</strong><a style="font-size:20px; font-weight: bold; padding-left: 20%"> ${employee.department}</a></p>
+            </div>
+            <table>
+                <tr>
+                    <th>Tháng</th>
+                    <th style="width:120px">Ngày nghỉ</th>
+                    <th>Nhân viên</th>
+                    <th>Quản lý</th>
+                    <th>Nhân sự</th>
+                    <th>Ghi chú</th>
+                </tr>
+                ${Array.from({ length: 12 }, (_, i) => `
+                    <tr>
+                        <td>${(i + 1).toString().padStart(2, '0')}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>`).join('')}
+            </table>
+            <div class="note">
+                <p>Phép ${year - 1} chuyển sang (hiệu lực đến 31/03/${year}): .............<strong>${employee.remaining}</strong>................ ngày</p>
+                <p>Số ngày phép năm ${year} được hưởng: ................................................... ngày</p>
+                <p>Tổng số ngày phép được hưởng: .......................................................... ngày</p>
+            </div>
+        </div>
+    `;
+}
+
+    function renderLeaveForms(data) {
+        const content = document.getElementById('content');
+        // Bỏ qua hàng đầu tiên nếu đó là tiêu đề cột
+        for (let i = 1; i < data.length; i++) {
+            const row = data[i];
+            const employee = {
+                name: row[1],      // Cột "Họ Và Tên"
+                department: row[2], // Cột "Bộ Phận"
+                remaining: row[3]
+            };
+            content.innerHTML += generateLeaveForm(employee);
+        }
+    }
+
+</script>
+
+</body>
+</html>
