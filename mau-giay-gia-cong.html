@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phiếu Nhập Gà Gia Công</title>
+  <style>
+    /* Reset CSS */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: "Times New Roman", serif;
+      font-size: 18px;
+      line-height: 1.5;
+      background-color: #fff;
+      padding: 0px;
+    }
+
+    @media print {
+      @page {
+        size: A5 landscape;
+        margin: 1cm;
+      }
+    }
+
+    .container {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    h2 {
+      text-align: left;
+      text-transform: uppercase;
+      font-size: 18px;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .info {
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 5px;
+    }
+
+    table, th, td {
+      border: 1px solid #000;
+    }
+
+    th, td {
+      padding: 4px;
+      text-align: center;
+      height: 30px;
+    }
+
+    .footer {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .footer div {
+      text-align: center;
+      width: 33%;
+    }
+
+    .date {
+      margin-top: 8px;
+      text-align: right;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>CÔNG TY CỔ PHẦN BMFOOD</h2>
+    <div class="title">PHIẾU NHẬP GÀ GIA CÔNG</div>
+
+    <div class="info">Người giao hàng:............................................................................................................................</div>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="resize">STT</th>
+          <th class="resize">Loại Gà</th>
+          <th class="resize">Số Xe</th>
+          <th class="resize">Số Con</th>
+          <th class="resize">Ghi Chú</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>2</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>3</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>4</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>5</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>6</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>7</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>8</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td colspan="2"><strong>Tổng Cộng</strong></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <div class="date">
+      BMFood, Ngày.......Tháng........Năm.${year}
+    </div>
+
+    <div class="footer">
+      <div>Bảo Vệ</div>
+      <div>Bên Nhận</div>
+      <div>Bên Giao Gà Gia Công</div>
+    </div>
+  </div>
+  <script src="https://a1abatrap.github.io/form/getCurrentYear.js"></script>
+   <script src="https://a1abatrap.github.io/form/resize.js"></script>
+</body>
+</html>
