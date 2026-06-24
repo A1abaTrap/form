@@ -1,211 +1,322 @@
-<html lang="vi"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phiếu Đề Nghị Xuất Kho</title>
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A5 VIP Birthday Card Sheet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: "Times New Roman", serif;
-            margin: 0;
-            padding: 0;
+        :root{
+            --ink:#111;
+            --paper:#fff;
+            --soft:#666;
         }
-        .container {
-            width: 100%;
-            margin: 0 auto;
-            padding: 20px;
-            box-sizing: border-box;
-            /* Kích thước A5 nằm ngang */
-            max-width: 210mm;
-            max-height: 148mm;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-/*             margin-bottom: 20px; */
-        }
-        .header-left, .header-right {
-            width: 45%;
-        }
-        .header-center {
-            width: 10%;
-        }
-        .header-left p, .header-right p {
-            margin: 0;
-        }
-        .header-left {
-            text-align: left;
-        }
-        .header-right {
-            text-align: right;
-        }
-        h2 {
-            font-size: 18px;
-            text-align: center;
-            margin: 0;
-        }
-        .info {
-            line-height: 1.5;
-            font-size: 16px;
-        }
-        .info p {
-            margin: 5px 0;
-        }
-        .signatures {
-            display: flex;
-            justify-content: space-between;
-/*             margin-top: 30px; */
-            font-weight: bold;
-            font-size: 16px;
-        }
-        .signatures div {
-            text-align: center;
-            width: 30%;
-        }
-        .date {
-            text-align: right;
-            margin: 0;
-            font-style: italic;
-        }
-        .signatures-note {
-            margin-top: -10px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-/*             margin-top: 20px; */
-            font-size: 16px;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: center;
-        }
-        .resize {
-    position: relative;
-}
 
-.resize-handle {
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 5px;
-            height: 100%;
-            cursor: col-resize;
-            user-select: none;
-}
+        *{ box-sizing:border-box; }
+        html, body{
+            margin:0;
+            width:100%;
+            height:100%;
+            background:#ededed;
+            font-family:"Montserrat", Arial, sans-serif;
+            color:var(--ink);
+        }
 
+        body{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+        }
+
+        .sheet{
+            position:relative;
+            width:min(100%, 148mm);
+            aspect-ratio:148 / 210;
+            background:var(--paper);
+            box-shadow:0 14px 40px rgba(0,0,0,.14);
+            overflow:hidden;
+        }
+
+        .cut-guide{
+            position:absolute;
+            inset:8mm;
+            border:1px dashed rgba(0,0,0,.25);
+            pointer-events:none;
+        }
+
+        .cut-label{
+            position:absolute;
+            top:4mm;
+            left:50%;
+            transform:translateX(-50%);
+            font-size:9px;
+            letter-spacing:2px;
+            font-weight:700;
+            color:rgba(0,0,0,.55);
+            text-transform:uppercase;
+        }
+
+        .card{
+            position:absolute;
+            left:50%;
+            top:50%;
+            width:min(126mm, calc(100% - 24mm));
+            aspect-ratio:1.6 / 1;
+            transform:translate(-50%,-50%);
+            background:#fff;
+            border:2px solid #000;
+            box-shadow:none;
+            overflow:hidden;
+            transition:box-shadow .2s ease, transform .2s ease;
+        }
+
+        .card::before{
+            content:"";
+            position:absolute;
+            inset:4mm;
+            border:1px solid #000;
+            pointer-events:none;
+        }
+
+        .card::after{
+            content:"";
+            position:absolute;
+            inset:7mm;
+            border:1px dashed rgba(0,0,0,.35);
+            pointer-events:none;
+        }
+
+        .card:hover{
+            box-shadow:0 10px 22px rgba(0,0,0,.08);
+            transform:translate(-50%,-50%) translateY(-1px);
+        }
+
+        .ornament{
+            position:absolute;
+            inset:0;
+            pointer-events:none;
+        }
+
+        .ornament span{
+            position:absolute;
+            width:10mm;
+            height:10mm;
+            border-top:1px solid #000;
+            border-left:1px solid #000;
+        }
+
+        .tl{ top:5mm; left:5mm; }
+        .tr{ top:5mm; right:5mm; transform:scaleX(-1); }
+        .bl{ bottom:5mm; left:5mm; transform:scaleY(-1); }
+        .br{ bottom:5mm; right:5mm; transform:scale(-1); }
+
+        .content{
+            position:relative;
+            z-index:1;
+            height:100%;
+            padding:12mm 12mm 10mm;
+            display:flex;
+            flex-direction:column;
+            justify-content:space-between;
+            text-align:center;
+        }
+
+        .topline{
+            font-size:9px;
+            font-weight:700;
+            letter-spacing:2.6px;
+            text-transform:uppercase;
+        }
+
+        .title-wrap{
+            position:relative;
+            margin-top:2mm;
+        }
+
+        .watermark{
+            position:absolute;
+            left:50%;
+            top:48%;
+            transform:translate(-50%,-50%);
+            font-size:74px;
+            font-weight:800;
+            letter-spacing:1px;
+            color:#000;
+            opacity:.06;
+            line-height:1;
+            user-select:none;
+            pointer-events:none;
+        }
+
+        h1{
+            position:relative;
+            margin:0;
+            font-size:23px;
+            line-height:1.15;
+            font-weight:800;
+            letter-spacing:3px;
+            text-transform:uppercase;
+        }
+
+        .subtitle{
+            margin-top:4mm;
+            font-size:12px;
+            color:var(--soft);
+            letter-spacing:1px;
+        }
+
+        .codename{
+            width:72%;
+            margin:6mm auto 0;
+            padding:7mm 6mm;
+            border:1.5px solid #000;
+        }
+
+        .codename .label{
+            font-size:9px;
+            font-weight:700;
+            letter-spacing:3px;
+            text-transform:uppercase;
+            margin-bottom:3mm;
+        }
+
+        .codename .name{
+            font-size:22px;
+            font-weight:800;
+            letter-spacing:4px;
+            line-height:1;
+        }
+
+        .message{
+            margin:7mm auto 0;
+            max-width:92%;
+            font-size:11px;
+            line-height:1.8;
+            color:#222;
+        }
+
+        .bottom-row{
+            display:flex;
+            align-items:flex-end;
+            justify-content:space-between;
+            gap:8mm;
+            margin-top:auto;
+        }
+
+        .qr{
+            width:26mm;
+            height:26mm;
+            display:grid;
+            place-items:center;
+            flex:0 0 auto;
+        }
+
+        .qr::before{
+            content:"QR CODE";
+            font-size:8px;
+            letter-spacing:1.5px;
+            font-weight:700;
+        }
+
+        .date{
+            font-size:12px;
+            font-weight:700;
+            letter-spacing:2px;
+            margin-left:auto;
+        }
+
+        .footer-note{
+            position:absolute;
+            bottom:4mm;
+            left:50%;
+            transform:translateX(-50%);
+            font-size:8px;
+            letter-spacing:1.5px;
+            color:rgba(0,0,0,.5);
+            text-transform:uppercase;
+        }
+
+        @media (max-width: 700px){
+            body{ padding:10px; }
+            .sheet{ width:100%; max-width:148mm; }
+            h1{ font-size:20px; }
+            .codename .name{ font-size:18px; }
+            .message{ font-size:10px; }
+        }
+
+        @media print{
+            @page{
+                size:A5 portrait;
+                margin:0;
+            }
+
+            body{
+                padding:0;
+                background:#fff;
+            }
+
+            .sheet{
+                width:148mm;
+                height:210mm;
+                box-shadow:none;
+            }
+
+            .card{
+                box-shadow:none !important;
+                transition:none !important;
+            }
+
+            .card:hover{
+                box-shadow:none;
+                transform:translate(-50%,-50%);
+            }
+
+            .cut-guide, .cut-label, .footer-note{
+                opacity:.85;
+            }
+        }
     </style>
 </head>
 <body>
-   <div class="header-left">
-      <img src="https://a1abatrap.github.io/form/logofull-.png" alt="Bình Minh" width="150">
-   </div>
-    <div class="container">
-        <div class="header">
-            <div class="header-left">
-                <p><strong>CÔNG TY CỔ PHẦN BMFOOD</strong></p>
+    <main class="sheet" role="document" aria-label="A5 printable VIP birthday card sheet">
+        <div class="cut-guide" aria-hidden="true"></div>
+        <div class="cut-label">CUT HERE</div>
+
+        <article class="card" aria-label="VIP birthday card">
+            <div class="ornament" aria-hidden="true">
+                <span class="tl"></span>
+                <span class="tr"></span>
+                <span class="bl"></span>
+                <span class="br"></span>
             </div>
-            <div class="header-right">
+
+            <div class="content">
+                <div>
+                    <div class="topline">★ HAPPY BIRTHDAY Q ★</div>
+
+                    <section class="title-wrap">
+                        <div class="watermark" aria-hidden="true">HOÀNG QUYÊN</div>
+                        <h1>CHÚC MỪNG SINH NHẬT</h1>
+                        <div class="subtitle"></div>
+                    </section>
+                    <p class="message">
+                        Chúc bạn tuổi mới mạnh mẽ, vui vẻ, cười nhiều lên nhé.
+                    </p>
+                    <div class="date">30 / 06 / 2026</div>
+                </div>
+
+                <div class="bottom-row">
+                    <img class="qr" src="https://a1abatrap.github.io/form/qr_happyQ.png" />
+                    <div class="text">7-9-21-19-5 (A=1)</div>
+
+                </div>
             </div>
-        </div>
+        </article>
 
-        <h2>PHIẾU ĐỀ NGHỊ XUẤT KHO</h2>
-
-        <div class="info">
-            <p>Người đề nghị: .................................................. Bộ Phận: ..................................................</p>
-            <p>Mục đích sử dụng: ..............................................................................................................................</p>
-        </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th class="resize">STT</th>
-                    <th class="resize">TÊN VẬT TƯ</th>
-                    <th class="resize">ĐVT</th>
-                    <th class="resize">SỐ LƯỢNG</th>
-                    <th class="resize">GHI CHÚ</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>1</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>2</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>3</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>4</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>5</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>6</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>7</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>8</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>9</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>10</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>11</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>12</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>13</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>14</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>15</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>16</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>17</td><td></td><td></td><td></td><td></td></tr>
-                <tr><td>18</td><td></td><td></td><td></td><td></td></tr>
-            </tbody>
-        </table>
-
-        <p class="date">Bình Minh, Ngày ..... Tháng ..... Năm .....</p>
-
-        <div class="signatures">
-            <div>
-                <p>Ban Giám Đốc</p>
-                <p class="signatures-note">(Ký, ghi rõ họ tên)</p>
-            </div>
-            <div>
-                <p>Người Kiểm Tra</p>
-                <p class="signatures-note">(Ký, ghi rõ họ tên)</p>
-            </div>
-            <div>
-                <p>Người Đề Nghị</p>
-                <p class="signatures-note">(Ký, ghi rõ họ tên)</p>
-            </div>
-        </div>
-    </div>
-<script>
-    const table = document.querySelector("table");
-    let startX, startWidth, resizableCol;
-
-    // Bắt đầu kéo
-    function startResize(e) {
-        resizableCol = e.target.parentElement;
-        startX = e.pageX;
-        startWidth = resizableCol.offsetWidth;
-        document.addEventListener("mousemove", resizeColumn);
-        document.addEventListener("mouseup", stopResize);
-    }
-
-    // Thay đổi kích thước
-    function resizeColumn(e) {
-        const newWidth = startWidth + (e.pageX - startX);
-        resizableCol.style.width = newWidth + "px";
-    }
-
-    // Dừng kéo
-    function stopResize() {
-        document.removeEventListener("mousemove", resizeColumn);
-        document.removeEventListener("mouseup", stopResize);
-    }
-
-    // Gắn sự kiện vào các thẻ th để cho phép kéo
-    document.querySelectorAll("th.resize").forEach(th => {
-        const resizeHandle = document.createElement("div");
-        resizeHandle.style.height = "100%";
-        resizeHandle.style.width = "5px";
-        resizeHandle.style.position = "absolute";
-        resizeHandle.style.right = "0";
-        resizeHandle.style.top = "0";
-        resizeHandle.style.cursor = "col-resize";
-        resizeHandle.addEventListener("mousedown", startResize);
-        th.appendChild(resizeHandle);
-        th.style.position = "relative";
-    });
-</script>
-
-
-</body></html>
+        <div class="footer-note">Print on A5 and cut along the dashed guide</div>
+    </main>
+</body>
+</html>
