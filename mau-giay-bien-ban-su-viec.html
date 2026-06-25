@@ -1,49 +1,49 @@
-<!doctype html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A5 VIP Birthday Card Sheet</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <style>
         :root{
-            --ink:#111;
-            --paper:#fff;
-            --soft:#666;
+            --ink:#1b1b1b;
+            --paper:#fffaf6;
+            --soft:#7a5c5c;
+            --accent:#c85d7a;
+            --accent2:#f2c14e;
+            --border:#2a2a2a;
         }
 
         *{ box-sizing:border-box; }
         html, body{
             margin:0;
             width:100%;
-            height:100%;
-            background:#ededed;
+            min-height:100%;
+            background:#fff;
             font-family:"Montserrat", Arial, sans-serif;
             color:var(--ink);
         }
 
         body{
-            display:flex;
-            align-items:center;
-            justify-content:center;
             padding:20px;
         }
 
-        .sheet{
+        .page{
             position:relative;
             width:min(100%, 148mm);
             aspect-ratio:148 / 210;
-            background:var(--paper);
-            box-shadow:0 14px 40px rgba(0,0,0,.14);
+            background:#fff;
+            box-shadow:none;
             overflow:hidden;
+            margin:0 auto 20px;
         }
 
         .cut-guide{
             position:absolute;
             inset:8mm;
-            border:1px dashed rgba(0,0,0,.25);
+            border:1px dashed rgba(0,0,0,.18);
             pointer-events:none;
         }
 
@@ -55,7 +55,7 @@
             font-size:9px;
             letter-spacing:2px;
             font-weight:700;
-            color:rgba(0,0,0,.55);
+            color:rgba(0,0,0,.45);
             text-transform:uppercase;
         }
 
@@ -66,18 +66,16 @@
             width:min(126mm, calc(100% - 24mm));
             aspect-ratio:1.6 / 1;
             transform:translate(-50%,-50%);
-            background:#fff;
-            border:2px solid #000;
-            box-shadow:none;
+            background:linear-gradient(135deg, #fff, #fff4ea);
+            border:2px solid var(--border);
             overflow:hidden;
-            transition:box-shadow .2s ease, transform .2s ease;
         }
 
         .card::before{
             content:"";
             position:absolute;
             inset:4mm;
-            border:1px solid #000;
+            border:1px solid rgba(0,0,0,.9);
             pointer-events:none;
         }
 
@@ -85,13 +83,8 @@
             content:"";
             position:absolute;
             inset:7mm;
-            border:1px dashed rgba(0,0,0,.35);
+            border:1px dashed rgba(200,93,122,.5);
             pointer-events:none;
-        }
-
-        .card:hover{
-            box-shadow:0 10px 22px rgba(0,0,0,.08);
-            transform:translate(-50%,-50%) translateY(-1px);
         }
 
         .ornament{
@@ -104,8 +97,8 @@
             position:absolute;
             width:10mm;
             height:10mm;
-            border-top:1px solid #000;
-            border-left:1px solid #000;
+            border-top:1px solid var(--accent);
+            border-left:1px solid var(--accent);
         }
 
         .tl{ top:5mm; left:5mm; }
@@ -129,6 +122,7 @@
             font-weight:700;
             letter-spacing:2.6px;
             text-transform:uppercase;
+            color:var(--accent);
         }
 
         .title-wrap{
@@ -138,14 +132,14 @@
 
         .watermark{
             position:absolute;
-            left:50%;
-            top:48%;
+            left:60%;
+            top:200%;
             transform:translate(-50%,-50%);
             font-size:74px;
             font-weight:800;
             letter-spacing:1px;
-            color:#000;
-            opacity:.06;
+            color:var(--accent2);
+            opacity:.18;
             line-height:1;
             user-select:none;
             pointer-events:none;
@@ -159,6 +153,7 @@
             font-weight:800;
             letter-spacing:3px;
             text-transform:uppercase;
+            color:var(--ink);
         }
 
         .subtitle{
@@ -166,28 +161,6 @@
             font-size:12px;
             color:var(--soft);
             letter-spacing:1px;
-        }
-
-        .codename{
-            width:72%;
-            margin:6mm auto 0;
-            padding:7mm 6mm;
-            border:1.5px solid #000;
-        }
-
-        .codename .label{
-            font-size:9px;
-            font-weight:700;
-            letter-spacing:3px;
-            text-transform:uppercase;
-            margin-bottom:3mm;
-        }
-
-        .codename .name{
-            font-size:22px;
-            font-weight:800;
-            letter-spacing:4px;
-            line-height:1;
         }
 
         .message{
@@ -201,8 +174,8 @@
         .bottom-row{
             display:flex;
             align-items:flex-end;
-            justify-content:space-between;
-            gap:8mm;
+            justify-content:flex-start;
+            gap:4mm;
             margin-top:auto;
         }
 
@@ -212,20 +185,18 @@
             display:grid;
             place-items:center;
             flex:0 0 auto;
+            background:rgba(242,193,78,.08);
+            border:1px solid rgba(0,0,0,.15);
+            margin-left:-2mm;
+            object-fit:cover;
         }
 
-        .qr::before{
-            content:"QR CODE";
-            font-size:8px;
-            letter-spacing:1.5px;
-            font-weight:700;
-        }
-
-        .date{
+        .text{
             font-size:12px;
             font-weight:700;
             letter-spacing:2px;
             margin-left:auto;
+            color:var(--accent);
         }
 
         .footer-note{
@@ -239,11 +210,47 @@
             text-transform:uppercase;
         }
 
+        .back-content{
+            position:relative;
+            height:100%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:12mm;
+            text-align:center;
+        }
+
+        .back-watermark{
+            position:absolute;
+            left:50%;
+            top:48%;
+            transform:translate(-50%,-50%);
+            font-size:74px;
+            font-weight:800;
+            letter-spacing:1px;
+            color:var(--accent2);
+            opacity:.18;
+            line-height:1;
+            user-select:none;
+            pointer-events:none;
+        }
+
+        .back-content .text{
+            position:relative;
+            margin:0;
+            font-size:16px;
+            letter-spacing:3px;
+            z-index:1;
+        }
+
+        .hidden-expired{
+            display:none !important;
+        }
+
         @media (max-width: 700px){
             body{ padding:10px; }
-            .sheet{ width:100%; max-width:148mm; }
+            .page{ width:100%; max-width:148mm; }
             h1{ font-size:20px; }
-            .codename .name{ font-size:18px; }
             .message{ font-size:10px; }
         }
 
@@ -253,70 +260,95 @@
                 margin:0;
             }
 
-            body{
-                padding:0;
+            *{
+                -webkit-print-color-adjust:exact;
+                print-color-adjust:exact;
+            }
+
+            html, body{
                 background:#fff;
             }
 
-            .sheet{
+            body{
+                padding:0;
+            }
+
+            .page{
                 width:148mm;
                 height:210mm;
                 box-shadow:none;
+                margin:0;
+                page-break-after:always;
+                background:#fff;
             }
 
-            .card{
-                box-shadow:none !important;
-                transition:none !important;
+            .page:last-child{
+                page-break-after:auto;
             }
 
-            .card:hover{
-                box-shadow:none;
-                transform:translate(-50%,-50%);
-            }
-
-            .cut-guide, .cut-label, .footer-note{
-                opacity:.85;
+            .cut-guide,
+            .cut-label,
+            .footer-note{
+                opacity:.2;
             }
         }
     </style>
 </head>
 <body>
-    <main class="sheet" role="document" aria-label="A5 printable VIP birthday card sheet">
-        <div class="cut-guide" aria-hidden="true"></div>
-        <div class="cut-label">CUT HERE</div>
+    <div id="app">
+        <main class="page" role="document" aria-label="A5 printable VIP birthday card front">
+            <div class="cut-guide" aria-hidden="true"></div>
+            <div class="cut-label">CUT HERE</div>
 
-        <article class="card" aria-label="VIP birthday card">
-            <div class="ornament" aria-hidden="true">
-                <span class="tl"></span>
-                <span class="tr"></span>
-                <span class="bl"></span>
-                <span class="br"></span>
-            </div>
-
-            <div class="content">
-                <div>
-                    <div class="topline">★ HAPPY BIRTHDAY Q ★</div>
-
-                    <section class="title-wrap">
-                        <div class="watermark" aria-hidden="true">HOÀNG QUYÊN</div>
-                        <h1>CHÚC MỪNG SINH NHẬT</h1>
-                        <div class="subtitle"></div>
-                    </section>
-                    <p class="message">
-                        Chúc bạn tuổi mới mạnh mẽ, vui vẻ, cười nhiều lên nhé.
-                    </p>
-                    <div class="date">30 / 06 / 2026</div>
+            <article class="card" aria-label="VIP birthday card front">
+                <div class="ornament" aria-hidden="true">
+                    <span class="tl"></span>
+                    <span class="tr"></span>
+                    <span class="bl"></span>
+                    <span class="br"></span>
                 </div>
 
-                <div class="bottom-row">
-                    <img class="qr" src="https://a1abatrap.github.io/form/qr_happyQ.png" />
+                <div class="content">
+                    <div>
+                        <div class="topline">★ HAPPY BIRTHDAY Q ★</div>
+
+                        <section class="title-wrap">
+                            <div class="watermark" aria-hidden="true">HOÀNG QUYÊN</div>
+                            <h1>CHÚC MỪNG SINH NHẬT</h1>
+                            <div class="subtitle"></div>
+                        </section>
+
+                        <p class="message">Chúc bạn tuổi mới mạnh mẽ, vui vẻ, cười nhiều lên nhé.</p>
+                        <div class="text">30/06/2026</div>
+                    </div>
+
+                    <div class="bottom-row">
+                        <img class="qr" src="https://a1abatrap.github.io/form/qr_happyQ.png" alt="QR code">
+                    </div>
+                </div>
+            </article>
+        </main>
+
+        <main class="page" role="document" aria-label="A5 printable VIP birthday card back">
+            <div class="cut-guide" aria-hidden="true"></div>
+            <div class="cut-label">CUT HERE</div>
+
+            <article class="card" aria-label="VIP birthday card back">
+                <div class="back-content">
+                    <div class="back-watermark" aria-hidden="true">HOÀNG QUYÊN</div>
                     <div class="text">7-9-21-19-5 (A=1)</div>
-
                 </div>
-            </div>
-        </article>
+            </article>
+        </main>
+    </div>
 
-        <div class="footer-note">Print on A5 and cut along the dashed guide</div>
-    </main>
+    <script>
+        (function () {
+            const expiry = new Date('2026-06-29T23:59:59');
+            if (new Date() > expiry) {
+                document.getElementById('app').style.display = 'none';
+            }
+        })();
+    </script>
 </body>
 </html>
