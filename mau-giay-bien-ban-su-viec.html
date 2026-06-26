@@ -10,11 +10,11 @@
 
     <style>
         :root{
-            --ink:#1b1b1b;
-            --soft:#7a5c5c;
-            --accent:#c85d7a;
-            --accent2:#f2c14e;
-            --border:#2a2a2a;
+            --ink:#111111;
+            --soft:#5c3f3f;
+            --accent:#9f2f53;
+            --accent2:#c88a00;
+            --border:#111111;
         }
 
         *{ box-sizing:border-box; }
@@ -26,6 +26,8 @@
             background:#fff;
             font-family:"Montserrat", Arial, sans-serif;
             color:var(--ink);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
 
         body{ padding:20px; }
@@ -44,7 +46,7 @@
             margin:auto;
             width:min(130mm, calc(100% - 10mm));
             height:calc((min(135mm, calc(100% - 10mm))) / 1.6);
-            border:1px dashed rgba(0,0,0,.25);
+            border:1px dashed rgba(0,0,0,.35);
             pointer-events:none;
         }
 
@@ -55,12 +57,11 @@
             transform:translateX(-50%);
             font-size:9px;
             letter-spacing:2px;
-            font-weight:700;
-            color:rgba(0,0,0,.45);
+            font-weight:800;
+            color:rgba(0,0,0,.65);
             text-transform:uppercase;
         }
 
-        /* ✅ CARD FIX */
         .card{
             position:absolute;
             left:50%;
@@ -68,25 +69,25 @@
             width:min(126mm, calc(100% - 24mm));
             aspect-ratio:1.6 / 1;
             transform:translate(-50%,-50%);
-            background:linear-gradient(135deg, #fff, #fff4ea);
+            background:linear-gradient(135deg, #fff8ef, #ffe0b8);
             border:2px solid var(--border);
             border-radius:2mm;
             overflow:hidden;
-            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+            box-shadow:0 10px 30px rgba(0,0,0,0.12);
         }
 
         .card::before{
             content:"";
             position:absolute;
             inset:4mm;
-            border:1px solid rgba(0,0,0,.85);
+            border:1px solid rgba(0,0,0,1);
         }
 
         .card::after{
             content:"";
             position:absolute;
             inset:7mm;
-            border:1px dashed rgba(200,93,122,.5);
+            border:1px dashed rgba(159,47,83,.95);
         }
 
         .ornament span{
@@ -115,7 +116,7 @@
 
         .topline{
             font-size:9px;
-            font-weight:700;
+            font-weight:800;
             letter-spacing:2.6px;
             text-transform:uppercase;
             color:var(--accent);
@@ -126,16 +127,15 @@
             margin-top:2mm;
         }
 
-        /* ✅ FIX watermark */
         .watermark{
             position:absolute;
             left:50%;
-            top:50%;
+            top:200%;
             transform:translate(-50%,-50%);
             font-size:74px;
             font-weight:800;
             color:var(--accent2);
-            opacity:.15;
+            opacity:.42;
             user-select:none;
             pointer-events:none;
         }
@@ -146,6 +146,7 @@
             font-weight:800;
             letter-spacing:3px;
             text-transform:uppercase;
+            color:#111;
         }
 
         .message{
@@ -153,11 +154,12 @@
             max-width:92%;
             font-size:11px;
             line-height:1.8;
+            color:#111;
         }
 
         .text{
             font-size:12px;
-            font-weight:700;
+            font-weight:800;
             letter-spacing:2px;
             color:var(--accent);
         }
@@ -172,7 +174,7 @@
             width:26mm;
             height:26mm;
             border-radius:2mm;
-            border:1px solid rgba(0,0,0,.15);
+            border:1px solid rgba(0,0,0,.4);
         }
 
         .arrow{
@@ -198,14 +200,18 @@
             font-size:74px;
             font-weight:800;
             color:var(--accent2);
-            opacity:.15;
+            opacity:.42;
             pointer-events:none;
         }
 
         @media print{
             @page{ size:A5 portrait; margin:0; }
 
-            body{ padding:0; }
+            body{
+                padding:0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
 
             .page{
                 width:148mm;
