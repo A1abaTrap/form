@@ -3,13 +3,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A5 VIP Birthday Card Sheet</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
         :root{
             --ink:#1b1b1b;
-            --paper:#fffaf6;
             --soft:#7a5c5c;
             --accent:#c85d7a;
             --accent2:#f2c14e;
@@ -17,6 +18,7 @@
         }
 
         *{ box-sizing:border-box; }
+
         html, body{
             margin:0;
             width:100%;
@@ -26,24 +28,23 @@
             color:var(--ink);
         }
 
-        body{
-            padding:20px;
-        }
+        body{ padding:20px; }
 
         .page{
             position:relative;
             width:min(100%, 148mm);
             aspect-ratio:148 / 210;
-            background:#fff;
-            box-shadow:none;
-            overflow:hidden;
             margin:0 auto 20px;
+            overflow:hidden;
         }
 
         .cut-guide{
             position:absolute;
-            inset:8mm;
-            border:1px dashed rgba(0,0,0,.18);
+            inset:0;
+            margin:auto;
+            width:min(130mm, calc(100% - 10mm));
+            height:calc((min(135mm, calc(100% - 10mm))) / 1.6);
+            border:1px dashed rgba(0,0,0,.25);
             pointer-events:none;
         }
 
@@ -59,6 +60,7 @@
             text-transform:uppercase;
         }
 
+        /* ✅ CARD FIX */
         .card{
             position:absolute;
             left:50%;
@@ -68,15 +70,16 @@
             transform:translate(-50%,-50%);
             background:linear-gradient(135deg, #fff, #fff4ea);
             border:2px solid var(--border);
+            border-radius:2mm;
             overflow:hidden;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
         }
 
         .card::before{
             content:"";
             position:absolute;
             inset:4mm;
-            border:1px solid rgba(0,0,0,.9);
-            pointer-events:none;
+            border:1px solid rgba(0,0,0,.85);
         }
 
         .card::after{
@@ -84,13 +87,6 @@
             position:absolute;
             inset:7mm;
             border:1px dashed rgba(200,93,122,.5);
-            pointer-events:none;
-        }
-
-        .ornament{
-            position:absolute;
-            inset:0;
-            pointer-events:none;
         }
 
         .ornament span{
@@ -130,37 +126,26 @@
             margin-top:2mm;
         }
 
+        /* ✅ FIX watermark */
         .watermark{
             position:absolute;
-            left:60%;
-            top:200%;
+            left:50%;
+            top:50%;
             transform:translate(-50%,-50%);
             font-size:74px;
             font-weight:800;
-            letter-spacing:1px;
             color:var(--accent2);
-            opacity:.18;
-            line-height:1;
+            opacity:.15;
             user-select:none;
             pointer-events:none;
         }
 
         h1{
-            position:relative;
             margin:0;
             font-size:23px;
-            line-height:1.15;
             font-weight:800;
             letter-spacing:3px;
             text-transform:uppercase;
-            color:var(--ink);
-        }
-
-        .subtitle{
-            margin-top:4mm;
-            font-size:12px;
-            color:var(--soft);
-            letter-spacing:1px;
         }
 
         .message{
@@ -168,46 +153,32 @@
             max-width:92%;
             font-size:11px;
             line-height:1.8;
-            color:#222;
-        }
-
-        .bottom-row{
-            display:flex;
-            align-items:flex-end;
-            justify-content:flex-start;
-            gap:4mm;
-            margin-top:auto;
-        }
-
-        .qr{
-            width:26mm;
-            height:26mm;
-            display:grid;
-            place-items:center;
-            flex:0 0 auto;
-            background:rgba(242,193,78,.08);
-            border:1px solid rgba(0,0,0,.15);
-            margin-left:-2mm;
-            object-fit:cover;
         }
 
         .text{
             font-size:12px;
             font-weight:700;
             letter-spacing:2px;
-            margin-left:auto;
             color:var(--accent);
         }
 
-        .footer-note{
-            position:absolute;
-            bottom:4mm;
-            left:50%;
-            transform:translateX(-50%);
-            font-size:8px;
-            letter-spacing:1.5px;
-            color:rgba(0,0,0,.5);
-            text-transform:uppercase;
+        .bottom-row{
+            display:flex;
+            align-items:center;
+            gap:4mm;
+        }
+
+        .qr{
+            width:26mm;
+            height:26mm;
+            border-radius:2mm;
+            border:1px solid rgba(0,0,0,.15);
+        }
+
+        .arrow{
+            margin-left:auto;
+            font-size:16px;
+            color:var(--accent);
         }
 
         .back-content{
@@ -216,139 +187,105 @@
             display:flex;
             align-items:center;
             justify-content:center;
-            padding:12mm;
             text-align:center;
         }
 
         .back-watermark{
             position:absolute;
             left:50%;
-            top:48%;
+            top:50%;
             transform:translate(-50%,-50%);
             font-size:74px;
             font-weight:800;
-            letter-spacing:1px;
             color:var(--accent2);
-            opacity:.18;
-            line-height:1;
-            user-select:none;
+            opacity:.15;
             pointer-events:none;
         }
 
-        .back-content .text{
-            position:relative;
-            margin:0;
-            font-size:16px;
-            letter-spacing:3px;
-            z-index:1;
-        }
-
-        .hidden-expired{
-            display:none !important;
-        }
-
-        @media (max-width: 700px){
-            body{ padding:10px; }
-            .page{ width:100%; max-width:148mm; }
-            h1{ font-size:20px; }
-            .message{ font-size:10px; }
-        }
-
         @media print{
-            @page{
-                size:A5 portrait;
-                margin:0;
-            }
+            @page{ size:A5 portrait; margin:0; }
 
-            *{
-                -webkit-print-color-adjust:exact;
-                print-color-adjust:exact;
-            }
-
-            html, body{
-                background:#fff;
-            }
-
-            body{
-                padding:0;
-            }
+            body{ padding:0; }
 
             .page{
                 width:148mm;
                 height:210mm;
-                box-shadow:none;
-                margin:0;
                 page-break-after:always;
-                background:#fff;
-            }
-
-            .page:last-child{
-                page-break-after:auto;
-            }
-
-            .cut-guide,
-            .cut-label,
-            .footer-note{
-                opacity:.2;
             }
         }
     </style>
 </head>
+
 <body>
-    <div id="app">
-        <main class="page" role="document" aria-label="A5 printable VIP birthday card front">
-            <div class="cut-guide" aria-hidden="true"></div>
-            <div class="cut-label">CUT HERE</div>
+<div id="app">
 
-            <article class="card" aria-label="VIP birthday card front">
-                <div class="ornament" aria-hidden="true">
-                    <span class="tl"></span>
-                    <span class="tr"></span>
-                    <span class="bl"></span>
-                    <span class="br"></span>
-                </div>
+    <!-- FRONT -->
+    <main class="page">
+        <div class="cut-guide"></div>
+        <div class="cut-label">CUT HERE</div>
 
-                <div class="content">
-                    <div>
-                        <div class="topline">★ HAPPY BIRTHDAY Q ★</div>
+        <article class="card">
+            <div class="ornament">
+                <span class="tl"></span>
+                <span class="tr"></span>
+                <span class="bl"></span>
+                <span class="br"></span>
+            </div>
 
-                        <section class="title-wrap">
-                            <div class="watermark" aria-hidden="true">HOÀNG QUYÊN</div>
-                            <h1>CHÚC MỪNG SINH NHẬT</h1>
-                            <div class="subtitle"></div>
-                        </section>
+            <div class="content">
 
-                        <p class="message">Chúc bạn tuổi mới mạnh mẽ, vui vẻ, cười nhiều lên nhé.</p>
-                        <div class="text">30/06/2026</div>
+                <div>
+                    <div class="topline">★ HAPPY BIRTHDAY QUYÊN ★</div>
+
+                    <div class="title-wrap">
+                        <div class="watermark">HOÀNG QUYÊN</div>
+                        <h1>CHÚC MỪNG SINH NHẬT</h1>
                     </div>
 
-                    <div class="bottom-row">
-                        <img class="qr" src="https://a1abatrap.github.io/form/qr_happyQ.png" alt="QR code">
-                    </div>
+                    <p class="message">
+                        Chúc bạn tuổi mới mạnh mẽ, vui vẻ, mạnh khỏe, cười nhiều lên nhé 🎂💐
+                    </p>
+
+                    <div class="text">30/06/2026</div>
                 </div>
-            </article>
-        </main>
 
-        <main class="page" role="document" aria-label="A5 printable VIP birthday card back">
-            <div class="cut-guide" aria-hidden="true"></div>
-            <div class="cut-label">CUT HERE</div>
-
-            <article class="card" aria-label="VIP birthday card back">
-                <div class="back-content">
-                    <div class="back-watermark" aria-hidden="true">HOÀNG QUYÊN</div>
-                    <div class="text">Enjoy your meal!<br>7-9-21-19-5 (A=1)</div>
+                <div class="bottom-row">
+                    <img class="qr" src="https://a1abatrap.github.io/form/qr_happyQ.png">
+                    <div class="arrow">→</div>
                 </div>
-            </article>
-        </main>
-    </div>
 
-    <script>
-        (function () {
-            const expiry = new Date('2026-06-29T23:59:59');
-            if (new Date() > expiry) {
-                document.getElementById('app').style.display = 'none';
-            }
-        })();
-    </script>
+            </div>
+        </article>
+    </main>
+
+    <!-- BACK -->
+    <main class="page">
+        <div class="cut-guide"></div>
+        <div class="cut-label">CUT HERE</div>
+
+        <article class="card">
+
+            <div class="back-content">
+                <div class="back-watermark">HOÀNG QUYÊN</div>
+                <div>
+                    <div class="text">Enjoy your meal!</div>
+                    <div class="text">7-9-21-19-5 (A=1)</div>
+                </div>
+            </div>
+
+        </article>
+    </main>
+
+</div>
+
+<script>
+(function () {
+    const expiry = new Date('2026-06-29T23:59:59');
+    if (new Date() > expiry) {
+        document.getElementById('app').style.display = 'none';
+    }
+})();
+</script>
+
 </body>
 </html>
