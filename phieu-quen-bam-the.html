@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu xác nhận quên chấm công</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 210mm;
+            height: 297mm;
+            font-family: "Times New Roman", serif;
+        }
+
+        /* 1 trang A4 */
+        .page {
+            width: 210mm;
+            height: 297mm;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+
+            /* Khoảng cách nhỏ để dễ cắt */
+            padding: 5mm;
+        }
+
+        /* Mỗi phiếu */
+        .form {
+            border: 1px dashed #000;
+            padding: 4mm;
+            font-size: 12px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+
+        .info {
+            line-height: 1.6;
+        }
+
+        .info p {
+            margin: 1px 0;
+        }
+
+        .input-line {
+            display: inline-block;
+            border-bottom: 1px dotted #000;
+            width: 48%;
+            height: 14px;
+            vertical-align: bottom;
+        }
+
+        .date-line {
+            display: inline-block;
+            border-bottom: 1px dotted #000;
+            width: 42%;
+            height: 14px;
+            vertical-align: bottom;
+        }
+
+        /* Bảng giờ */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5px;
+            font-size: 11px;
+        }
+
+        td {
+            border: 1px solid #000;
+            padding: 4px 3px;
+        }
+
+        td:first-child {
+            width: 58%;
+        }
+
+        .time {
+            text-align: center;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* Chữ ký */
+        .signatures {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-top: 7px;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .signature-space {
+            height: 25px;
+        }
+
+        /* Không tạo trang thứ 2 khi in */
+        @media print {
+            html,
+            body {
+                width: 210mm;
+                height: 297mm;
+            }
+
+            .page {
+                width: 210mm;
+                height: 297mm;
+                padding: 5mm;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page" id="page"></div>
+
+<script>
+    const page = document.getElementById("page");
+
+    const formHTML = `
+        <div class="form">
+			<div class="title">
+                CÔNG TY CỔ PHẦN BMFOOD
+				
+            </div>
+            <div class="title">
+                PHIẾU XÁC NHẬN<br>
+                QUÊN CHẤM CÔNG
+            </div>
+
+            <div class="info">
+
+                <p>
+                    <strong>Họ và tên:</strong>
+                    <span class="input-line"></span>
+                </p>
+
+                <p>
+                    <strong>Bộ phận:</strong>
+                    <span class="input-line"></span>
+                </p>
+
+                <p>
+                    <strong>Ngày:</strong>
+                    <span class="date-line"></span>
+                </p>
+
+            </div>
+
+            <table>
+                <tr>
+                    <td><strong>Giờ vào thực tế</strong></td>
+                    <td class="time">____ : ____</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Giờ ra thực tế</strong></td>
+                    <td class="time">____ : ____</td>
+                </tr>
+            </table>
+
+            <div class="signatures">
+
+                <div>
+                    <strong>Nhân viên</strong>
+                    <div class="signature-space"></div>
+                    
+                </div>
+
+                <div>
+                    <strong>Quản lý</strong>
+                    <div class="signature-space"></div>
+                
+                </div>
+
+            </div>
+
+        </div>
+    `;
+
+    // Tạo đúng 9 phiếu = 3 x 3
+    for (let i = 0; i < 9; i++) {
+        page.insertAdjacentHTML("beforeend", formHTML);
+    }
+</script>
+
+</body>
+</html>
