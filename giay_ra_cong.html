@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giấy Ra Cổng - BMFOOD</title>
+
+    <style>
+        /* RESET CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+            font-family: "Times New Roman", serif;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #000;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        button, input, textarea {
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        /* KHỔ GIẤY A5 NGANG */
+        .paper {
+            width: 210mm;
+            height: 148mm;
+            margin: 0 auto;
+            padding: 9mm 10mm;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            align-items: flex-start;
+        }
+
+        .header-left,
+        .header-right {
+            width: 48%;
+        }
+
+        .header strong {
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .header p {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .header .underline {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* TIÊU ĐỀ */
+        .title {
+            text-align: center;
+            margin-top: 7px;
+            margin-bottom: 9px;
+        }
+
+        .title h1 {
+            font-size: 19px;
+            text-transform: uppercase;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* NỘI DUNG */
+        .content {
+            font-size: 14px;
+        }
+
+        .field {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .field-label {
+            white-space: nowrap;
+        }
+
+        .dots {
+            flex: 1;
+            border-bottom: 1px dotted #000;
+            margin-left: 3px;
+            min-width: 20px;
+            height: 15px;
+        }
+
+        .time-row {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 5px;
+        }
+
+        .time-label {
+            width: 190px;
+            flex-shrink: 0;
+        }
+
+        .time-group {
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+        }
+
+        .time-line {
+            width: 30px;
+            border-bottom: 1px dotted #000;
+            display: inline-block;
+            height: 15px;
+        }
+
+        .date-line {
+            width: 22px;
+            border-bottom: 1px dotted #000;
+            display: inline-block;
+            height: 15px;
+        }
+
+        /* CHỮ KÝ */
+        .signature {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            text-align: center;
+            margin-top: 11px;
+        }
+
+        .signature strong {
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .security-time {
+            margin-top: 45px;
+            text-align: left;
+            padding-left: 12px;
+            line-height: 2;
+        }
+
+        /* IN ẤN */
+        @page {
+            size: A5 landscape;
+            margin: 0;
+        }
+
+        @media print {
+            html, body {
+                width: 210mm;
+                height: 148mm;
+                margin: 0;
+                padding: 0;
+            }
+
+            .paper {
+                width: 210mm;
+                height: 148mm;
+                margin: 0;
+                box-shadow: none;
+                page-break-after: avoid;
+            }
+        }
+
+        /* XEM TRƯỚC */
+        @media screen {
+            body {
+                background: #ddd;
+                padding: 20px;
+            }
+
+            .paper {
+                box-shadow: 0 0 8px #888;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="paper">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-left">
+            <strong>CÔNG TY CỔ PHẦN BMFOOD</strong>
+        </div>
+
+        <div class="header-right">
+            <strong>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong>
+            <p class="underline">Độc lập – Tự do – Hạnh phúc</p>
+        </div>
+    </div>
+
+    <!-- TIÊU ĐỀ -->
+    <div class="title">
+        <h1>GIẤY RA CỔNG</h1>
+    </div>
+
+    <!-- NỘI DUNG -->
+    <div class="content">
+
+        <div class="field">
+            <strong class="field-label">Họ và tên:</strong>
+            <span class="dots"></span>
+        </div>
+
+        <div class="field">
+            <strong class="field-label">Bộ phận:</strong>
+            <span class="dots"></span>
+        </div>
+
+        <div style="margin-top: 3px; margin-bottom: 4px;">
+            <strong>Thời gian ra cổng:</strong>
+        </div>
+
+        <div class="time-row">
+            <span class="time-label">- Từ:</span>
+            <div class="time-group">
+                <span class="time-line"></span> giờ
+                <span class="time-line"></span> phút, ngày
+                <span class="date-line"></span> /
+                <span class="date-line"></span> / 20....
+            </div>
+        </div>
+
+        <div class="time-row">
+            <span class="time-label">- Dự kiến về lại (nếu có) lúc:</span>
+            <div class="time-group">
+                <span class="time-line"></span> giờ
+                <span class="time-line"></span> phút, ngày
+                <span class="date-line"></span> /
+                <span class="date-line"></span> / 20....
+            </div>
+        </div>
+
+        <div class="field">
+            <strong class="field-label">Lý do ra cổng:</strong>
+            <span class="dots"></span>
+        </div>
+
+        <div class="field">
+            <strong class="field-label">Đồ vật mang theo (nếu có):</strong>
+            <span class="dots"></span>
+        </div>
+
+    </div>
+
+    <!-- KÝ XÁC NHẬN -->
+    <div class="signature">
+
+        <div>
+            <strong>PHÊ DUYỆT</strong>
+        </div>
+
+        <div>
+            <strong>XÁC NHẬN CỦA BẢO VỆ</strong>
+
+            <div class="security-time">
+                Giờ đi: ........................
+                <br>
+                Giờ về: ........................
+            </div>
+        </div>
+
+        <div>
+            <strong>NGƯỜI RA CỔNG</strong>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
